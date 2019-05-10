@@ -11,8 +11,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Internal dependencies
-const constants = require('../useful/const');
-const logger = require("../useful/logger.js");
+const constants = require('./useful/const');
+const logger = require("./useful/logger.js");
 const convertors = require("./podcasts/convertors");
 const podcastsData = require("./podcasts/podcastsData");
 

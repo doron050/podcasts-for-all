@@ -1,5 +1,5 @@
-const logger = require("../../useful/logger");
-const constants = require("../../useful/const");
+const logger = require("../useful/logger");
+const constants = require("../useful/const");
 const podcastsData = require("./podcastsData");
 
 // All functions that convert podcast or episode object to Stremio object
