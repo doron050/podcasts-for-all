@@ -65,6 +65,9 @@ builder.defineCatalogHandler(({
 
 	logger.debug(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "type: " + type + " & id: " + id);
 
+	let genre = "";
+	if (extra.genre) genre = extra.genre;
+
 	// If there is active search using search api instead of best podcasts api
 	if (extra.search) {
 		logger.debug(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
@@ -83,7 +86,7 @@ builder.defineCatalogHandler(({
 	} else {
 		return (
 
-			podcastsData.getBestPodcastsWithEpisodes(0).then(function (podcasts) {
+			podcastsData.getBestPodcastsWithEpisodes(0, convertors.getGenreId(genre)).then(function (podcasts) {
 
 				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray
 

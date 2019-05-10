@@ -128,4 +128,12 @@ function generateGenres(podcastGenres){
     return (["drama", "history"])
 }
 
-module.exports = {episodesToVideos, podcastsToSerieses, podcastToSeries};
+// TODO
+function getGenreId(genreName){
+
+    if (genreName == "a") return (97);
+    if (genreName == "b")  return (82);
+    else return "";
+}
+
+module.exports = {episodesToVideos, podcastsToSerieses, podcastToSeries, getGenreId};

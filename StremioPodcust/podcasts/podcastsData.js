@@ -41,8 +41,9 @@ function getBestPodcastsWithEpisodes(page, genreId, region) {
     return (
         getBestPodcasts(page, genreId, region).then(function (podcasts) {
 
-            numberOfPodcasts = podcasts.length;
-
+            if (podcasts)numberOfPodcasts = podcasts.length;
+            else podcasts = [];
+            
             podcasts.forEach(podcast => {
 
                 getPodcastById(podcast.id).then(function (podcastWithEpisodes) {
