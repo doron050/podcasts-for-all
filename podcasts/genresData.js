@@ -11,12 +11,11 @@ function getGenresStringsFromArray(ids){
         
         ids.forEach(function(id){
 
-            genresStrings.push(genresById[id].name)
+            genresStrings.push(genresById[id].name.replace(" & ", " and "))
         })
     }
     else {
-        genresStrings.push(genresById[id].name);
-
+        genresStrings.push(genresById[id].name.replace(" & ", " and "));
     }
      
     logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
@@ -62,7 +61,7 @@ function findGenreId(genreName){
 
     while (!genreFounded){
 
-        if (genres.genres[genreCount].name.toLowerCase() === genreName.toLowerCase()){
+        if (genres.genres[genreCount].name.toLowerCase().replace(" & ", " and ") === genreName.toLowerCase().replace(" & ", " and ")){
 
             genreId = genres.genres[genreCount].id;
             genreFounded = true;

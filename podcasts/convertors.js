@@ -1,6 +1,7 @@
 const logger = require("../useful/logger");
 const constants = require("../useful/const");
 const podcastsData = require("./podcastsData");
+const genresData = require("./genresData");
 
 // All functions that convert podcast or episode object to Stremio object
 function episodeToVideo(episode, episodeNumber){
@@ -10,7 +11,7 @@ function episodeToVideo(episode, episodeNumber){
     let video = {
         id: episode.id,
         title: episode.title,
-        released: new Date(episode.pub_date_ms),
+        released: (new Date(episode.pub_date_ms)).toISOString(),
         thumbnail: episode.thumbnail,
         streams: [{
             url: episode.audio
@@ -60,19 +61,20 @@ function podcastToSeries(podcast){
 		type: "series",
 		name: podcast.title,
 		poster: podcast.thumbnail,
-		genres: generateGenres(podcast.genres), //todo: set geners by data from podcast
+		genres: genresData.getGenresStringsFromArray(podcast.genre_ids), //todo: set geners by data from podcast
 		posterShape: "landscape",
 		background: podcast.image,
-		logo: constants.PODOCAST_LOGO,
+		logo: constants.PODCAST_LOGO,
 		description: podcast.description,
-		//releaseInfo: "",
+		releaseInfo: (new Date(podcast.earliest_pub_date_ms)).getFullYear() + "-" + (new Date(podcast.latest_pub_date_ms)).getFullYear(),
 		director: podcast.publisher,
-		imdbRating: 9.9,
+		imdbRating: 10,
 		//dvdRelease: "",
-		//released: "",
+		released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
 		inTheaters: true,
 		videos: episodesAsVideos.asArray,
-		//certification: "",
+        certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
+        runtime: "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
 		language: podcast.language,
 		country: podcast.country,
 		awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
