@@ -1,25 +1,31 @@
 const logger = require("../useful/logger");
 const constants = require("../useful/const");
+const genres = require("./genres");
 
-function getGenres(ids){
+// Translate genre ids to to names
+function getGenresStringsFromArray(ids){
 
-    let genres = ['a','b'];
-/*     if (Array.isArray(ids)){
+     let genresStrings = [];
+     let genresById = createPodcastGenresById(genres.genres);
+     if (Array.isArray(ids)){
         
         ids.forEach(function(id){
 
-            genres.push(genres.genresById[id].name)
+            genresStrings.push(genresById[id].name)
         })
     }
     else {
-        genres.push(genres.genresById[id].name);
+        genresStrings.push(genresById[id].name);
 
-    } */
+    }
      
-    return (genres)
+    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
+
+    return (genresStrings)
 }
 
-function getGenresFromArray(genres){
+// Translate genre names to to ids
+function getGenresIdsFromArray(genres){
 
     let genresIds = [];
 
@@ -28,7 +34,9 @@ function getGenresFromArray(genres){
         genresIds.push(genre.id);
     });
 
-    return (getGenres(genresIds));
+    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length);
+    
+    return (getGenresStringsFromArray(genresIds));
 }
 
 // Use only once for creating a genres object by id
@@ -41,8 +49,30 @@ function createPodcastGenresById(genres){
         genresById[genre.id] = genre;
     });
 
-    logger.info(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genresById.length);
+    logger.info(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genres.length);
+
     return(genresById);
 }
 
-module.exports = {createPodcastGenresById, getGenres, getGenresFromArray}
+function findGenreId(genreName){
+
+    let genreFounded = false;
+    let genreCount = 0;
+    let genreId = 0;
+
+    while (!genreFounded){
+
+        if (genres.genres[genreCount].name.toLowerCase() === genreName.toLowerCase()){
+
+            genreId = genres.genres[genreCount].id;
+            genreFounded = true;
+
+            logger.info(constants.LOG_MESSAGES.SUCCESS_FIND_GENRE_BY_ID + genreName + " - " + genreId);
+        }
+        genreCount++;
+    }   
+
+    return genreId;
+}
+
+module.exports = {createPodcastGenresById, getGenresStringsFromArray, getGenresIdsFromArray, findGenreId}

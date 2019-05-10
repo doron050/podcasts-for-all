@@ -44,8 +44,7 @@ const manifest = {
 	catalogs: [{
 		type: "Podcasts",
 		id: "poducsts",
-		genres: genresData.getGenresFromArray(genres.genres),
-		//genrea: ["a","b","c"],
+		genres: genresData.getGenresIdsFromArray(genres.genres),
 		extraSupported: ['genre', 'search', 'skip']
 	}],
 	resources: [
@@ -71,8 +70,11 @@ builder.defineCatalogHandler(({
 
 	logger.debug(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "type: " + type + " & id: " + id);
 
-	let genre = "";
-	if (extra.genre) genre = extra.genre;
+	let genre = 0;
+	if (extra.genre){
+		genre = extra.genre;
+		genre = genresData.findGenreId(genre)
+	} 
 
 	// If there is active search using search api instead of best podcasts api
 	if (extra.search) {
@@ -92,7 +94,7 @@ builder.defineCatalogHandler(({
 	} else {
 		return (
 
-			podcastsData.getBestPodcastsWithEpisodes(0, convertors.getGenreId(genre)).then(function (podcasts) {
+			podcastsData.getBestPodcastsWithEpisodes(0, genre).then(function (podcasts) {
 
 				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray
 
