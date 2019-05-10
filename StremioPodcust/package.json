@@ -1,0 +1,11 @@
+{
+	"name": "stremio-addon-StremioPodcust",
+	"version": "0.0.1",
+	"description": "Listen to amazing podcust of all types and all languages ",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"stremio-addon-sdk": "1.1.x"
+	}
+}
