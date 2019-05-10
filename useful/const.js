@@ -62,6 +62,7 @@ const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
     DEFAULT_OFFSET: 0,
     DEFAULT_REGION: "us",
+    DEFAULT_CERTIFICATION: "PG",
     SORT: {
         BY_RELEVANCE: 0,
         BY_DATE: 1
