@@ -1,239 +1,136 @@
+// External dependencies
 const {
 	addonBuilder
-} = require("stremio-addon-sdk")
+} = require("stremio-addon-sdk");
 
+const axios = require('axios');
+const date_time = require('date-time');
+
+// Dependencie which read from the env variables
+const dotenv = require('dotenv');
+dotenv.config();
+
+// Internal dependencies
+const constants = require('../useful/const');
+const logger = require("../useful/logger.js");
+const convertors = require("./podcasts/convertors");
+const podcastsData = require("./podcasts/podcastsData");
+
+logger.info(constants.LOG_MESSAGES.START_ADDON);
+
+// Define the addon
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
 const manifest = {
-	"id": "community.StremioPodcust",
-	"version": "0.0.1",
-	"sorts": [{prop: "bla", name: "Twitch.tv", types:["tv"]}],
-	"filter": { "query.twitch_id": { "$exists": true }, "query.type": { "$in":["tv"] } },
-	"catalogs": [{
-		"type": "Podcasts",
-		"id": "poducsts",
+	id: "community.StremioPodcust",
+	version: "0.0.1",
+	sorts: [{
+		prop: "bla",
+		name: "Twitch.tv",
+		types: ["tv"]
+	}],
+	filter: {
+		"query.twitch_id": {
+			"$exists": true
+		},
+		"query.type": {
+			"$in": ["tv"]
+		}
+	},
+	catalogs: [{
+		type: "Podcasts",
+		id: "poducsts",
 		genres: ["a", "b", "c"],
 		extraSupported: ['genre', 'search', 'skip']
 	}],
-	"resources": [
+	resources: [
 		"catalog",
 		"stream",
 		"meta"
 	],
-	"types": [
+	types: [
 		"series"
 	],
-	"name": "top",
-	"description": "Listen to amazing podcust of all types and all languages "
+	name: "top",
+	description: "Listen to amazing podcust of all types and all languages "
 }
-const builder = new addonBuilder(manifest)
-var podcustAsMeta
-var podcustAsMetaById = {};
+const builder = new addonBuilder(manifest);
+
+// Addon handlers
+// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
 builder.defineCatalogHandler(({
 	type,
 	id,
 	extra
 }) => {
-	console.log("request for catalogs: " + type + " " + id)
-	// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
 
-	getPodcust(extra.search)
-	if (originalPodcustsList) {
+	logger.debug(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "type: " + type + " & id: " + id);
 
-		podcustAsMeta = [];
-		originalPodcustsList.forEach(podcust => {
-			var poducuatAsMeta = podcustToMeta(podcust);
-			podcustAsMetaById[podcust.id] = poducuatAsMeta;
-			podcustAsMeta.push(poducuatAsMeta);
-		});
-		return Promise.resolve({
-			metas: podcustAsMeta
-		})
+	// If there is active search using search api instead of best podcasts api
+	if (extra.search) {
+		logger.debug(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
+
+		return (
+
+			podcastsData.searchPodcastsWithEpisodes(extra.search).then(function (podcasts) {
+
+				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray
+
+				return {
+					metas: finalPodcasts
+				}
+			})
+		)
 	} else {
+		return (
 
+			podcastsData.getBestPodcastsWithEpisodes(0).then(function (podcasts) {
 
-		return Promise.resolve({
-			metas: [{
-				id: "tt1254207",
-				type: "movie",
-				name: "The Big Buck Bunny",
-				poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/220px-Big_buck_bunny_poster_big.jpg"
-			}]
-		})
+				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray
+
+				return {
+					metas: finalPodcasts
+				}
+			})
+		)
 	}
 })
 
-var currentPoducastId;
+// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineMetaHandler.md
 builder.defineMetaHandler(({
 	type,
 	id
 }) => {
-	currentPoducastId = id;
-	// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineMetaHandler.md
-	return Promise.resolve({
-		meta: podcustAsMetaById[id]
-	})
+
+	logger.debug(constants.LOG_MESSAGES.START_META_HANDLER + "type: " + type + " & id: " + id);
+
+	//currentPoducastId = id;
+	return (podcastsData.getPodcastById(id).then(function (podcast) {
+
+		return ({
+			meta: convertors.podcastToSeries(podcast)
+		});
+	}));
 })
 
+// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
 builder.defineStreamHandler(({
 	id,
 	type
 }) => {
-	console.log("request for streams: " + currentPoducastId)
-	// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
+
+	logger.debug(constants.LOG_MESSAGES.START_STREAM_HANDLER + "type: " + type + " & id: " + id);
+
 	// serve one stream to big buck bunny
-	const stream = {
-		url: podcustAsMetaById[currentPoducastId].videosById[id].streams[0].url
-	}
-	return Promise.resolve({
-		streams: [stream]
-	})
 
-	// otherwise return no streams
-	/* 	return Promise.resolve({
-			streams: []
-		}) */
-})
+	//console.log("request for streams: " + currentPoducastId)
+	return (podcastsData.getEpisodeById(id).then(function (episode) {
 
-const axios = require('axios');
-const unirest = require('unirest');
-const date_time = require('date-time');
-var genres;
-var originalPodcustsList = [];
-
-function getPodcust(searchQ) {
-
-	var q = "star%20wars&";
-	if (searchQ) {
-
-		unirest.get('https://listen-api.listennotes.com/api/v2/search?q=' + searchQ + '&sort_by_date=0&type=podcust&offset=0&len_min=0&len_max=10&genre_ids=&published_before=&published_after=&only_in=title%2Cdescription&language=&ocid=&ncid=&safe_mode=1')
-			.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b')
-			.end(function (response) {
-				var originalPodcustsList2 = response.body.results;
-				console.log(response.body);
-	
-				originalPodcustsList2.forEach(function (podcust) {
-	
-					var pid = podcust.id
-					unirest.get('https://listen-api.listennotes.com/api/v2/podcasts/' + pid + '?next_episode_pub_date=&sort=recent_first')
-						.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b')
-						.end(function (response) {
-							originalPodcustsList.push(response.body);
-						});
-				});
-			});
-	}
-	else {
-	unirest.get('https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=125&page=2&region=fr&safe_mode=1')
-		.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b')
-		.end(function (response) {
-			var originalPodcustsList2 = response.body.podcasts;
-			console.log(response.body);
-
-			originalPodcustsList2.forEach(function (podcust) {
-
-				var pid = podcust.id
-				unirest.get('https://listen-api.listennotes.com/api/v2/podcasts/' + pid + '?next_episode_pub_date=&sort=recent_first')
-					.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b')
-					.end(function (response) {
-						originalPodcustsList.push(response.body);
-					});
-			});
-		});}
-}
-
-/* function getPodcustGenres() {
-
-	unirest.get('https://listen-api.listennotes.com/api/v2/genres')
-		.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b')
-		.end(function (response) {
-			genres = response.body.genres;
-		});
-} */
-//getPodcustGenres();
-
-/* function getPodcustGenreById(genreId) {
-	return (unirest.get('https://listen-api.listennotes.com/api/v2/genres?id=' + genreId)
-		.header('X-ListenAPI-Key', '64dd1a7158b84dd7a60c7eda1028fa0b'))
-} */
-
-function podcustToMeta(podcust) {
-
-	var awards = "Explicit Content: X | ";
-	if (podcust.explicit_content) {
-		awards = "Explicit Content: V | "
-	}
-	if (podcust.is_claimed) {
-		awards += "Claimed: V"
-	} else {
-		awards += "Claimed: X"
-	}
-
-	var videos = createVideosMeta(podcust.episodes, podcust.extra.youtube_url)
-	//getPodcustGenreById(podcust.genres)
-	var meta = {
-		id: podcust.id,
-		type: "series",
-		//name: podcust.title_original,
-		name: podcust.title,
-		poster: podcust.thumbnail,
-		genres: ["tocomplete"],
-		posterShape: "landscape",
-		background: podcust.image,
-		logo: "https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/podcast-2-512.png",
-		description: podcust.description,
-		//releaseInfo: "",
-		director: podcust.publisher,
-		imdbRating: 9.9,
-		//dvdRelease: "",
-		//released: "",
-		inTheaters: true,
-		videos: videos.episodes,
-		videosById: videos.byId,
-		//certification: "",
-		//runtime: podcust.audio_length_sec / 60,
-		language: podcust.language,
-		country: podcust.country,
-		awards: awards,
-		website: podcust.website,
-		//audio: podcust.audio
-	}
-
-
-	return (meta);
-}
-
-function createVideosMeta(episodes, trailer) {
-	var episodesAsMeta = [];
-	var episodesById = {};
-
-	episodes.forEach(function (episode, idx) {
-
-		var video = {
-			id: episode.id,
-			title: episode.title,
-			released: new Date(episode.pub_date_ms),
-			thumbnail: episode.thumbnail,
+		return ({
 			streams: [{
 				url: episode.audio
-			}],
-			available: true,
-			episode: idx + 1,
-			season: 1,
-			trailer: trailer,
-			overview: episode.description
-		}
-		episodesById[video.id] = video;
-		episodesAsMeta.push(video)
-	});
-
-	return {
-		episodes: episodesAsMeta,
-		byId: episodesById
-	};
-
-
-}
-
-getPodcust();
+			}]
+		})
+	}));
+})
 
 module.exports = builder.getInterface()
