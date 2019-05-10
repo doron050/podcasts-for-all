@@ -47,7 +47,7 @@ const PODCASTS_API_KEY = {
 }
 
 // Podcast api docs https://www.listennotes.com/api/docs/
-const API_INSTANCE = axios.create({
+const apiInstance = axios.create({
     baseURL: PODCASTS_DATA_BASE_API_URL,
     //timeout: 2000,
     headers: {
@@ -86,6 +86,6 @@ module.exports = {
     PODCASTS_DATA_BASE_API_URL,
     PODCASTS_DATA_API_ROUTES,
     PODCASTS_API_KEY,
-    API_INSTANCE,
+    apiInstance,
     API_CONSTANTS
 }

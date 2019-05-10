@@ -1,9 +1,10 @@
 const logger = require("../useful/logger");
 const constants = require("../useful/const");
 
-function getBestPodcasts(page, genreId, region) {
+async function getBestPodcasts(skip, genreId, region) {
 
     logger.trace(constants.LOG_MESSAGES.START_GET_BEST_PODCASTS);
+    const podcastPerRequest = 20;
 
     // For genre filter
     let genre = constants.API_CONSTANTS.DEFAULT_GENRE;
@@ -12,23 +13,27 @@ function getBestPodcasts(page, genreId, region) {
     let regionFilter = constants.API_CONSTANTS.DEFAULT_REGION;
     if (region) regionFilter = region;
 
-    return (constants.API_INSTANCE.get(constants.PODCASTS_DATA_API_ROUTES.BEST_PODCASTS, {
+
+    let podcasts = [];
+    let canKeepPulling = true;
+    let internalPage = skip/podcastPerRequest + 1;
+
+    do {
+        const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.BEST_PODCASTS, {
             params: {
-                page: page,
+                page: internalPage,
                 genre_id: genre,
-                region: regionFilter,
-                safe_mode: constants.API_CONSTANTS.EXCLUDE_EXCPLICIT.YES
             }
-        })
-        .then(function (response) {
+        });
+        podcasts.push(...result.data.podcasts);
+        canKeepPulling = result.data.has_next;
+        internalPage++;
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + response.data.podcasts.length);
-            return (response.data.podcasts);
-        })
-        .catch(function (error) {
 
-            logger.debug(constants.LOG_MESSAGES.ERROR_GET_BEST_PODCASTS + error);
-        }));
+    } while (podcasts.length < 100 && canKeepPulling);
+
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
+    return podcasts;
 }
 
 function getBestPodcastsWithEpisodes(page, genreId, region) {
@@ -85,7 +90,7 @@ function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     let offset = constants.API_CONSTANTS.DEFAULT_OFFSET;
     if (offsetForPagination) offset = offsetForPagination;
 
-    return (constants.API_INSTANCE.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
+    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
             params: {
                 q: searchTerm,
                 sort_by_date: constants.API_CONSTANTS.SORT.BY_RELEVANCE,
@@ -158,7 +163,7 @@ function getPodcastById(id) {
     logger.trace(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id);
 
     // For offset for pagination filter
-    return (constants.API_INSTANCE.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
+    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
             params: {
                 //next_episode_pub_date: "",
             }
@@ -180,7 +185,7 @@ function getEpisodeById(id) {
     logger.trace(constants.LOG_MESSAGES.START_GET_EPISODE_BY_ID + id);
 
     // For offset for pagination filter
-    return (constants.API_INSTANCE.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id)
+    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id)
         .then(function (response) {
 
             logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
