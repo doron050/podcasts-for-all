@@ -25,7 +25,8 @@ const LOG_MESSAGES = {
     START_META_HANDLER: "Handler: Meta | ",
     START_STREAM_HANDLER: "Handler: Stream | ",
     ON_GOING_HANDLE_WITH_PROMISES: "Not all promises 'getPodcastById' completed yet. More to go: ",
-    END_HANDLE_WITH_PROMISES: "All promises handled: "
+    END_HANDLE_WITH_PROMISES: "All promises handled: ",
+    INIT_GENRES_BY_ID_OBJECT: "Done! Create genres object. Num of genres: "
 }
 
 const PODCAST_LOGO = "https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/podcast-2-512.png";
@@ -45,6 +46,7 @@ const PODCASTS_API_KEY = {
     KEY: process.env.PODCASTS_API_KEY
 }
 
+// Podcast api docs https://www.listennotes.com/api/docs/
 const API_INSTANCE = axios.create({
     baseURL: PODCASTS_DATA_BASE_API_URL,
     //timeout: 2000,

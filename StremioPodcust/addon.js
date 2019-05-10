@@ -15,8 +15,13 @@ const constants = require('../useful/const');
 const logger = require("../useful/logger.js");
 const convertors = require("./podcasts/convertors");
 const podcastsData = require("./podcasts/podcastsData");
+const genres = require("./podcasts/genres");
+const genresData = require("./podcasts/genresData");
 
 logger.info(constants.LOG_MESSAGES.START_ADDON);
+
+// Init genrs objectk
+genres.genresById = genresData.createPodcastGenresById(genres.genres);
 
 // Define the addon
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
@@ -39,7 +44,8 @@ const manifest = {
 	catalogs: [{
 		type: "Podcasts",
 		id: "poducsts",
-		genres: ["a", "b", "c"],
+		genres: genresData.getGenresFromArray(genres.genres),
+		//genrea: ["a","b","c"],
 		extraSupported: ['genre', 'search', 'skip']
 	}],
 	resources: [
