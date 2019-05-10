@@ -90,21 +90,26 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     let offset = constants.API_CONSTANTS.DEFAULT_OFFSET;
     if (offsetForPagination) offset = offsetForPagination;
 
-    const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
-        params: {
-            q: searchTerm,
-            sort_by_date: constants.API_CONSTANTS.SORT.BY_RELEVANCE,
-            type: constants.API_CONSTANTS.TYPES.PODCAST,
-            offset: offset,
-            genre_Ids: genreIds,
-            only_in: [constants.API_CONSTANTS.ONLY_IN_FIELDS.TITLE, constants.API_CONSTANTS.ONLY_IN_FIELDS.DESCRIPTION],
-            safe_mode: constants.API_CONSTANTS.EXCLUDE_EXCPLICIT.YES
-        }
-    });
+    try {
+        const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
+            params: {
+                q: searchTerm,
+                sort_by_date: constants.API_CONSTANTS.SORT.BY_RELEVANCE,
+                type: constants.API_CONSTANTS.TYPES.PODCAST,
+                offset: offset,
+                genre_Ids: genreIds,
+                only_in: [constants.API_CONSTANTS.ONLY_IN_FIELDS.TITLE, constants.API_CONSTANTS.ONLY_IN_FIELDS.DESCRIPTION],
+                safe_mode: constants.API_CONSTANTS.EXCLUDE_EXCPLICIT.YES
+            }
+        });
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
+        logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
 
-    return result.data.results;
+        return result.data.results;
+    }
+    catch (e) {
+        logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + e);
+    }
 }
 
 function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
@@ -188,7 +193,7 @@ function getEpisodeById(id) {
         })
         .catch(function (error) {
 
-            logger.error(c  onstants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
+            logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
         }));
 }
 
