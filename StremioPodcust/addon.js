@@ -9,20 +9,10 @@ const manifest = {
 	"sorts": [{prop: "bla", name: "Twitch.tv", types:["tv"]}],
 	"filter": { "query.twitch_id": { "$exists": true }, "query.type": { "$in":["tv"] } },
 	"catalogs": [{
-<<<<<<< HEAD
 		"type": "Podcasts",
 		"id": "poducsts",
 		genres: ["a", "b", "c"],
 		extraSupported: ['genre', 'search', 'skip']
-=======
-		"type": "Podcust",
-		"id": "test",
-		"extra": [{
-			"name": "genre",
-			"options": [ "Best", "Hot" ],
-			"isRequired": false
-		}]
->>>>>>> e8f418729ac6c638af9bab06e227a9d8bd3b8416
 	}],
 	"resources": [
 		"catalog",
