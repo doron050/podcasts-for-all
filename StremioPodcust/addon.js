@@ -6,9 +6,16 @@ const {
 const manifest = {
 	"id": "community.StremioPodcust",
 	"version": "0.0.1",
+	"sorts": [{prop: "bla", name: "Twitch.tv", types:["tv"]}],
+	"filter": { "query.twitch_id": { "$exists": true }, "query.type": { "$in":["tv"] } },
 	"catalogs": [{
-		"type": "podcusts",
-		"id": "top"
+		"type": "Podcust",
+		"id": "test",
+		"extra": [{
+			"name": "genre",
+			"options": [ "Best", "Hot" ],
+			"isRequired": false
+		}]
 	}],
 	"resources": [
 		"catalog",
