@@ -93,9 +93,9 @@ builder.defineCatalogHandler(({
 		)
 	} else {
 		return (
-			podcastsData.getBestPodcastsWithEpisodes(extra.skip ? extra.skip :  0, genre).then(function (podcasts) {
+			podcastsData.getBestPodcasts(extra.skip ? extra.skip :  0, genre).then(function (podcasts) {
 
-
+				
 				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray;
 
 				return {

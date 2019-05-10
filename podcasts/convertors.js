@@ -54,40 +54,47 @@ function podcastToSeries(podcast){
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
-    let episodesAsVideos = episodesToVideos(podcast.episodes);
-
 	var series = {
 		id: podcast.id,
 		type: "series",
 		name: podcast.title,
 		poster: podcast.thumbnail,
-		genres: genresData.getGenresStringsFromArray(podcast.genre_ids), //todo: set geners by data from podcast
+		//genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
 		posterShape: "landscape",
 		background: podcast.image,
 		logo: constants.PODCAST_LOGO,
 		description: podcast.description,
 		releaseInfo: (new Date(podcast.earliest_pub_date_ms)).getFullYear() + "-" + (new Date(podcast.latest_pub_date_ms)).getFullYear(),
-		director: podcast.publisher,
-		imdbRating: 10,
+		director: [podcast.publisher],
+		//imdbRating: 10,
 		//dvdRelease: "",
 		released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
 		inTheaters: true,
-		videos: episodesAsVideos.asArray,
+		//videos: episodesAsVideos.asArray,
         certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
-        runtime: "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
+        //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
 		language: podcast.language,
 		country: podcast.country,
 		awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
 		website: podcast.website
     }
     
-    // Adds extra field on the series (the episodes / videos by id)
-    series.videosById = episodesAsVideos.asObjectById;
+    // Sets series parameters if there is episodes to the podcast
+    if (podcast.episodes){
+        series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
+        series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
+
+        let episodesAsVideos = episodesToVideos(podcast.episodes);
+        series.videos = episodesAsVideos.asArray;
+
+        // Adds extra field on the series (the episodes / videos by id)
+        series.videosById = episodesAsVideos.asObjectById;
+    }
 
     return (series);
 }
 
-function podcastsToSerieses(podcasts){
+function podcastsToSerieses(podcasts, simpleGenre){
 
     let serieses = {
         asArray: [],

@@ -199,6 +199,7 @@ function getEpisodeById(id) {
 }
 
 module.exports = {
+    getBestPodcasts,
     getBestPodcastsWithEpisodes,
     searchPodcastsWithEpisodes,
     getPodcastById,
