@@ -25,6 +25,7 @@ async function getBestPodcasts(skip, genreId, region) {
                 genre_id: genre,
             }
         });
+
         podcasts.push(...result.data.podcasts);
         canKeepPulling = result.data.has_next;
         internalPage++;
@@ -33,7 +34,6 @@ async function getBestPodcasts(skip, genreId, region) {
 
     logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;
-
 }
 
 function getBestPodcastsWithEpisodes(page, genreId, region) {
@@ -82,7 +82,7 @@ function getBestPodcastsWithEpisodes(page, genreId, region) {
         }));
 }
 
-function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
+async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
 
     logger.trace(constants.LOG_MESSAGES.START_SEARCH_PODCASTS + searchTerm);
 
@@ -90,27 +90,21 @@ function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     let offset = constants.API_CONSTANTS.DEFAULT_OFFSET;
     if (offsetForPagination) offset = offsetForPagination;
 
-    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
-            params: {
-                q: searchTerm,
-                sort_by_date: constants.API_CONSTANTS.SORT.BY_RELEVANCE,
-                type: constants.API_CONSTANTS.TYPES.PODCAST,
-                offset: offset,
-                genre_Ids: genreIds,
-                only_in: [constants.API_CONSTANTS.ONLY_IN_FIELDS.TITLE, constants.API_CONSTANTS.ONLY_IN_FIELDS.DESCRIPTION],
-                safe_mode: constants.API_CONSTANTS.EXCLUDE_EXCPLICIT.YES
-            }
-        })
-        .then(function (response) {
+    const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.SEARCH, {
+        params: {
+            q: searchTerm,
+            sort_by_date: constants.API_CONSTANTS.SORT.BY_RELEVANCE,
+            type: constants.API_CONSTANTS.TYPES.PODCAST,
+            offset: offset,
+            genre_Ids: genreIds,
+            only_in: [constants.API_CONSTANTS.ONLY_IN_FIELDS.TITLE, constants.API_CONSTANTS.ONLY_IN_FIELDS.DESCRIPTION],
+            safe_mode: constants.API_CONSTANTS.EXCLUDE_EXCPLICIT.YES
+        }
+    });
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + response.data.results.length);
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
 
-            return (response.data.results);
-        })
-        .catch(function (error) {
-
-            logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + error);
-        }));
+    return result.data.results;
 }
 
 function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
@@ -194,7 +188,7 @@ function getEpisodeById(id) {
         })
         .catch(function (error) {
 
-            logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
+            logger.error(c  onstants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
         }));
 }
 
