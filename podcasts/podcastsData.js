@@ -29,11 +29,11 @@ async function getBestPodcasts(skip, genreId, region) {
         canKeepPulling = result.data.has_next;
         internalPage++;
 
-
     } while (podcasts.length < 100 && canKeepPulling);
 
     logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;
+
 }
 
 function getBestPodcastsWithEpisodes(page, genreId, region) {
@@ -109,7 +109,7 @@ function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
         })
         .catch(function (error) {
 
-            logger.debug(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + error);
+            logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + error);
         }));
 }
 
@@ -176,7 +176,7 @@ function getPodcastById(id) {
         })
         .catch(function (error) {
 
-            logger.debug(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
+            logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
         }));
 }
 
@@ -194,7 +194,7 @@ function getEpisodeById(id) {
         })
         .catch(function (error) {
 
-            logger.debug(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
+            logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
         }));
 }
 
