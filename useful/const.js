@@ -80,6 +80,14 @@ const API_CONSTANTS = {
     EXCLUDE_EXCPLICIT: {
         YES: 1,
         NO: 0
+    },
+    STREAMS_TITLES: {
+        DEFAULT_STREAM_TITLE: "Stream",
+        LISTEN_NOTES_STREAM_TITLE: "Powered by LISTEN NOTES",
+        RSS_STREAM_TITLE: "RSS Feed",
+        WEBSITE_STREAM_TITLE: "Website",
+        SPOTIFY_STREAM_TITLE: "Spotify",
+        YOUTUBE_STREAM_TITLE: "Youtube (built-in player)"
     }
 }
 
