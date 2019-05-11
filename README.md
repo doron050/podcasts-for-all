@@ -77,7 +77,7 @@
   * Get the `podcast RSS`
   * Get to know your podcast via his `social network accounts`
 * Now you are ready to go by yourself. Enjoy! :tada:
-> We hope you have _**the great Podcast Listening Experience of your life!_** :rainbow:
+> We hope you have _the great Podcast Listening Experience of your life!_ :rainbow:
 
 ## Setup for Development
 
