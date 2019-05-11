@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png" alt="Podcast For All" width="150"></a>
   <br>
-  Podcast For All
+  Podcasts For All
   <br>
 </h1>
 
