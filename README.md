@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://www.datarespons.com/wp-content/uploads/2019/01/podcast-icon.png" alt="StremioPodcast" width="150"></a>
+  <img src="https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png" alt="StremioPodcast" width="150"></a>
   <br>
   StremioPodcast
   <br>
