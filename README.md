@@ -16,6 +16,7 @@
 <p align="center">
   • <a href="#Our-Vision">Our Vision</a> 
   • <a href="#Key-Features">Key Features</a>
+  • <a href="#How-to-Use">How to Use</a>
   • <a href="#Setup-for-Development">Setup for Dev</a>
   • <a href="https://www.stremio.com/competition">Add-On Master</a>
   • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
@@ -57,6 +58,26 @@
 
 #### Screenshot - Select Episode:
 ![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
+
+## How to Use
+* Open your Stremio client :computer::iphone:
+* Go to `addons` (usually it's up there :arrow_upper_right:)
+* Copy our addon url <http://podcasts-for-all.ga> and paste it on `Add-On Repository Url`
+* Now go back :arrow_backward: and then go to `Discover` :telescope:
+* Our top podcasts are under the `Podcasts` catalog
+* You can now filter your podcasts by `Genre` or `Country` (Each one represented as sub-catalog) :performing_arts:
+* If you like to take risks - Try out our `FeelingLucky` catalog (who knows, maybe you will find your one) :roller_coaster:
+* You can also `Search` for specific podcast using the search field above :arrow_up::mag_right:
+* Inside each `podcast` page you will find:
+  * alot of details about the podcast and the contant
+  * All the avialable `Episodes` of the selected podcast
+* When you select an `Episode` you can:
+  * Stream the episode right to your stremio
+  * Go to the `podcast website`
+  * Get the `podcast RSS`
+  * Get to know your podcast via his `social network accounts`
+* Now you are ready to go by yourself. Enjoy! :tada:
+> We hope you have _**the great Podcast Listening Experience of your life!_** :rainbow:
 
 ## Setup for Development
 
