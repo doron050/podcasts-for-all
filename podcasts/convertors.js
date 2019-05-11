@@ -4,7 +4,7 @@ const podcastsData = require("./podcastsData");
 const genresData = require("./genresData");
 
 // All functions that convert podcast or episode object to Stremio object
-function episodeToVideo(episode, episodeNumber){
+function episodeToVideo(episode, episodeNumber) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id);
 
@@ -26,7 +26,7 @@ function episodeToVideo(episode, episodeNumber){
     return (video);
 }
 
-function episodesToVideos(episodes){
+function episodesToVideos(episodes) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_EPISODES_TO_VIDEOS + episodes.length);
 
@@ -38,7 +38,7 @@ function episodesToVideos(episodes){
     let episodeNumber = 1;
 
     episodes.forEach(episode => {
-        
+
         let currentVideo = episodeToVideo(episode, episodeNumber);
 
         episodeNumber++;
@@ -50,6 +50,40 @@ function episodesToVideos(episodes){
     return (videos);
 }
 
+<<<<<<< HEAD
+function podcastToSeries(podcast) {
+
+    logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
+
+    var series = {
+        id: podcast.id,
+        type: "series",
+        name: podcast.title,
+        poster: podcast.thumbnail,
+        //genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
+        genres: generateBasicGenres(podcast),
+        posterShape: "landscape",
+        background: podcast.image,
+        logo: constants.PODCAST_LOGO,
+        description: podcast.description,
+        releaseInfo: generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms),
+        director: [podcast.publisher],
+        //imdbRating: 10,
+        //dvdRelease: "",
+        released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
+        inTheaters: true,
+        //videos: episodesAsVideos.asArray,
+        certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
+        //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
+        language: podcast.language,
+        country: podcast.country,
+        awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
+        website: podcast.website
+    }
+
+    // Sets series parameters if there is episodes to the podcast
+    if (podcast.episodes) {
+=======
 async function podcastToSeries(podcast){
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
@@ -82,6 +116,7 @@ async function podcastToSeries(podcast){
     // Sets series parameters if there is episodes to the podcast
     if (podcast.episodes){
         const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
+>>>>>>> 3fa974ed629a5d196fc32bf28ed2a5dca7af8071
         series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
 
@@ -95,15 +130,25 @@ async function podcastToSeries(podcast){
     return series;
 }
 
+<<<<<<< HEAD
+function podcastsToSerieses(podcasts, simpleGenre) {
+=======
 async function podcastsToSerieses(podcasts, simpleGenre){
+>>>>>>> 3fa974ed629a5d196fc32bf28ed2a5dca7af8071
 
     let serieses = {
         asArray: [],
         asObjectById: {}
     };
 
+<<<<<<< HEAD
+    podcasts.forEach(podcast => {
+
+        let currentSeries = podcastToSeries(podcast);
+=======
     for (let i=0;i<podcasts.length;i++){
         let currentSeries = await podcastToSeries(podcasts[i]);
+>>>>>>> 3fa974ed629a5d196fc32bf28ed2a5dca7af8071
 
         serieses.asArray.push(currentSeries);
         serieses.asObjectById[podcasts[i].id] = currentSeries;
@@ -118,32 +163,52 @@ async function asyncForEach(array, callback) {
     }
 }
 
-function generateAwards(explicit_content, is_claimed){
+function generateAwards(explicit_content, is_claimed) {
 
     let awards = "Explicit Content: X | ";
 
     if (explicit_content) {
-		awards = "Explicit Content: V | "
+        awards = "Explicit Content: V | "
     }
-    
+
     awards += "Claimed: ";
 
-	if (is_claimed) {
-		awards += "V"
-	} else {
-		awards += "X"
+    if (is_claimed) {
+        awards += "V"
+    } else {
+        awards += "X"
     }
 
     return (awards);
 }
 
-function generateGenres(podcastGenres){
+function generateBasicGenres(podcast) {
 
-    // TODO: Get strings by podcasts genres ids
-    return (["drama", "history"])
+    let basicGenres = [constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE,
+        "Number of Episodes: " + podcast.total_episodes,
+        "Country: " + podcast.country, "Language: " + podcast.language
+    ]
+
+    if (podcast.explicit_content) basicGenres.push("*Include Explicit Contact")
+
+    return (basicGenres);
 }
 
-function podcastToSeriesVideo(podcast){
+function generateReleaseInfo(oldestEpisodeTime, newestEpisodeTime) {
+
+    // The release info label shows years
+    let oldestEpisodeYear = (new Date(oldestEpisodeTime)).getFullYear();
+    let newestEpisosdeYear = (new Date(newestEpisodeTime)).getFullYear();
+    let releaseInfo = oldestEpisodeYear + "-" + newestEpisosdeYear;
+    if (oldestEpisodeYear == newestEpisosdeYear) {
+
+        releaseInfo = oldestEpisodeYear;
+    }
+
+    return (releaseInfo);
+}
+
+function podcastToSeriesVideo(podcast) {
 
     return ({
         id: "tt0108778:1:1",
@@ -158,4 +223,9 @@ function podcastToSeriesVideo(podcast){
     })
 }
 
-module.exports = {episodesToVideos, podcastsToSerieses, podcastToSeries, podcastToSeriesVideo};
+module.exports = {
+    episodesToVideos,
+    podcastsToSerieses,
+    podcastToSeries,
+    podcastToSeriesVideo
+};
