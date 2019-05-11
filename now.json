@@ -9,7 +9,7 @@
       { "src": "/(.*)", "dest": "server.js" }
     ],
     "env": {
-        "LOG_LEVEL": "@LOG_LEVEL",
-        "PODCASTS_API_KEY": "@PODCASTS_API_KEY"
+        "LOG_LEVEL": "@log_level",
+        "PODCASTS_API_KEY": "@podcast_api_key"
     }
   }
