@@ -76,7 +76,7 @@ async function getPodcastById(id, params = {}) {
         return response.data;
     }
     catch (e) {
-        logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
+        logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + e);
     }
 }
 
@@ -90,7 +90,7 @@ async function getEpisodeById(id) {
         return response.data;
     }
     catch (e) {
-        logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
+        logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + e);
     }
 }
 
@@ -111,22 +111,19 @@ async function getAllEpisodesForPodcast(podcast){
     return episodes.reverse();
 }
 
-function getFeelingLucky() {
-
+async function getFeelingLucky() {
     logger.trace(constants.LOG_MESSAGES.START_FEELING_LUCKY);
 
     // For offset for pagination filter
-    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.FEELING_LUCKY)
-        .then(function (response) {
+    try {
+        const response = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.FEELING_LUCKY);
 
-            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
-
-            return (response.data);
-        })
-        .catch(function (error) {
-
-            logger.error(constants.LOG_MESSAGES.ERROR_FEELING_LUCKY + error);
-        }));
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
+        return response.data;
+    }
+    catch (e) {
+        logger.error(constants.LOG_MESSAGES.ERROR_FEELING_LUCKY + e);
+    }
 }
 
 module.exports = {
