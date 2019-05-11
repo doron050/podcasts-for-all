@@ -28,32 +28,32 @@
 
 ## Key Features
 
-* Best podcasts worldwide (smart filters and ordering)
+* Best podcasts worldwide (smart filters and ordering) :trophy:
   * All types
-  * All languages & regions
-* Podcast catalogs:
+  * All languages & regions :european_castle: :tokyo_tower:
+* Podcast catalogs: :file_folder:
   * Top Podcasts
   * By Genres
   * By Country
   * Felling Luckey - Random podcast
-* Search for podcasts
-* Extra details
+* Search for podcasts :mag:
+* Extra details :bookmark:
   * Podcast length
   * Podcast website
   * Social Platforms refrences (Facebook, Spotify and more)
-* Stream HQ audio right to your device
+* Stream HQ audio right to your device :headphones:
   * Cast the podcast to available devices
 
-#### Screenshot - Main Podcasts Catalog
+#### Screenshot - Main Podcasts Catalog:
 ![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
 
-#### Screenshot - Select Episode
+#### Screenshot - Select Episode:
 ![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
 
 ## Setup
 
 * Go to <a href="https://www.listennotes.com/api/">Listen Notes API</a>
-* Create new **_account_** and save your **_API_KEY_**
+* Create new **_account_** and save your **_API_KEY_** :memo:
 * Now it's time for some preperation
 ```bash
 # Clone this repository
@@ -72,9 +72,9 @@ $ npm install
 ```
 
 * Run your addon server using `npm start`
-* Install it on your StreamIO app (web / desktop)
+* Install it on your StreamIO app (web / desktop) :computer:
   * The addon available here: <http://127.0.0.1:56960/manifest.json>
-* Now go to <https://staging.strem.io/#/discover/Podcasts> and enjoy your podcasts!
+* Now go to <https://staging.strem.io/#/discover/Podcasts> and enjoy your podcasts! :trumpet:
 
 
 Thanks
