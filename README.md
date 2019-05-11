@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">StremIO</a> and much more</h4>
+<h4 align="center">Stream the Best Podcasts Listening Experience to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
 
 <p align="center">
   <a href="https://paypal.me/NivM1">
@@ -14,11 +14,12 @@
 </p>
 
 <p align="center">
-  <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a> •
-  <a href="https://www.stremio.com/competition">Add-On Master</a> •
-  <a href="#Setup">Setup</a> 
-  </a> •
-  <a href="#Key-Features">Key Features</a> 
+  • <a href="#Our-Vision">Our Vision</a> 
+  • <a href="#Key-Features">Key Features</a>
+  • <a href="#Setup-for-Development">Setup for Dev</a>
+  • <a href="https://www.stremio.com/competition">Add-On Master</a>
+  • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
+  
 </p>
 
 > *Podcasts For All* - `have fun`, `be smart`.
@@ -29,10 +30,13 @@
 > **We are making our best efforts** to bring you the best podcasts resources.<br/>
 > If you like our addon, you can help us by <a href="https://paypal.me/NivM1"> donate</a>.
 
+## Our Vision
+> Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - StremIO
+
 ## Key Features
 
 * Best podcasts worldwide (smart filters and ordering) :trophy:
-  * All types
+  * All genres & types
   * All languages & regions :european_castle: :tokyo_tower:
 * Podcast catalogs: :file_folder:
   * Top Podcasts
@@ -53,7 +57,7 @@
 #### Screenshot - Select Episode:
 ![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
 
-## Setup
+## Setup for Development
 
 * Go to <a href="https://www.listennotes.com/api/">Listen Notes API</a> :page_facing_up:
 * Create new **_account_** and save your **_API_KEY_** :memo:
@@ -70,14 +74,15 @@ $ npm install
 ```
 * Set your `.env` file like that:
 ```diff
++# VERSION= [Addon Version]
 +# PODCASTS_API_KEY= [Listen Notes API KEY]
 +# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
 ```
 
-* Run your addon server using `npm start`
+* Run your addon local server using `npm start`
 * Install it on your StremIO app (web / desktop) :computer:
-  * The addon available here: <http://127.0.0.1:56960/manifest.json>
-* Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your podcasts!** :trumpet:
+  * The addon will be available here: <http://127.0.0.1:56960/manifest.json>
+* Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
 Thanks
