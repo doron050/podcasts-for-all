@@ -61,7 +61,7 @@ const apiInstance = axios.create({
 const ID_PREFIX = "ap";
 
 const CONTACT_EMAIL = "nmahnovsky@gmail.com";
-const ADDON_LOGO = "https://cdn4.iconfinder.com/data/icons/miu-hexagon-gloss-social/60/podcast-hexagon-gloss-social-media-512.png";
+const ADDON_LOGO = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png?raw=true";
 const ADDON_BACKGROUND = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_background.jpg?raw=true";
 
 const API_CONSTANTS = {
