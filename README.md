@@ -30,7 +30,7 @@
 > If you like our addon, you can help us by <a href="https://paypal.me/NivM1"> donate</a>.
 
 ## Our Vision
-> Deliver the **_best listening experience_** to the *_most verstile & high-quality_* podcasts right to your daily use media platform - StremIO
+> Deliver the **_best listening experience_** to the *_most verstile & high-quality_* podcasts<br/>right to your daily use media platform - StremIO
 
 ## Key Features
 
