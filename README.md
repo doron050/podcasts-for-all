@@ -70,6 +70,7 @@ $ npm install
 ```
 * Set your `.env` file like that:
 ```diff
++# VERSION= [Addon Version]
 +# PODCASTS_API_KEY= [Listen Notes API KEY]
 +# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
 ```
