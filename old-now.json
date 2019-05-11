@@ -1,0 +1,25 @@
+    {
+        "version": 2,
+        "builds": [{
+            "src": "*.js",
+            "use": "@now/node-server"
+        }],
+        "routes": [{
+                "src": "/resources/images/*.jpg",
+                "use": "@now/static"
+            },
+            {
+                "src": "/resources/images/*.png",
+                "use": "@now/static"
+            },
+            {
+                "src": "/(.*)",
+                "dest": "server.js"
+            }
+        ],
+        "env": {
+            "VERSION": "@version",
+            "LOG_LEVEL": "@log_level",
+            "PODCASTS_API_KEY": "@podcasts_api_key"
+        }
+    }
