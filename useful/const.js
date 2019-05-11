@@ -60,6 +60,10 @@ const apiInstance = axios.create({
 
 const ID_PREFIX = "ap";
 
+const CONTACT_EMAIL = "nmahnovsky@gmail.com";
+const ADDON_LOGO = "https://cdn.pixabay.com/photo/2017/08/21/12/16/podcast-2665179_960_720.png";
+const ADDON_BACKGROUND = "https://images.pexels.com/photos/953213/pexels-photo-953213.jpeg?cs=srgb&dl=ahsap-ahsap-masa-aygit-953213.jpg&fm=jpg";
+
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
     DEFAULT_OFFSET: 0,
@@ -102,5 +106,8 @@ module.exports = {
     PODCASTS_API_KEY,
     apiInstance,
     API_CONSTANTS,
-    ID_PREFIX
+    ID_PREFIX,
+    CONTACT_EMAIL,
+    ADDON_LOGO,
+    ADDON_BACKGROUND
 }

@@ -10,7 +10,7 @@ log4js.configure({
     categories: {
         default: {
             appenders: ['console'],
-            level: 'trace'
+            level: process.env.LOG_LEVEL
         }
     }
 });

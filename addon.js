@@ -43,6 +43,9 @@ const manifest = {
 		"series"
 	],
 	name: "Podcasts For All",
+	contactEmail: constants.CONTACT_EMAIL,
+	logo: constants.ADDON_LOGO,
+	background: constants.ADDON_BACKGROUND,
 	description: "Listen to the best podcastes- HQ, all genres, all languages! (Powered by LISTEN NOTES)"
 };
 const builder = new addonBuilder(manifest);
