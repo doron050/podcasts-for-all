@@ -8,7 +8,7 @@
 <h4 align="center">Stream the Best Podcasts Listening Experience to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
 
 <p align="center">
-  <a href="https://paypal.me/NivM1">
+  <a href="https://paypal.me/">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
 </p>
@@ -28,7 +28,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 
 > **We are making our best efforts** to bring you the best podcasts resources.<br/>
-> If you like our addon, you can help us by <a href="https://paypal.me/NivM1"> donate</a>.
+> If you like our addon, you can help us by <a href="https://paypal.me/">donate and become a backer</a>.
 
 ## Our Vision
 > Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - StremIO
@@ -50,6 +50,7 @@
   * Social Platforms refrences (Facebook, Spotify and more)
 * Stream HQ audio right to your device :headphones:
   * Cast the podcast to available devices
+* Powered by LISTEN NOTES API
 
 #### Screenshot - Main Podcasts Catalog:
 ![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
@@ -85,15 +86,15 @@ $ npm install
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
-Thanks
+### Support and Contact
 ------
 
 **Podcast For All** © 2019+, DE, NM Released under the [MIT License].<br>
-Authored and maintained by DE, NM. with help from [contributors].
+Authored and maintained by DE, NM. with help from contributors.
 
 
-> GitHub [Niv M](https://github.com/nivm1) <br/>
-> GitHub [Doron Eli](https://github.com/doron050)
+> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [@Doron Eli](https://github.com/doron050) <br/>
+> Contact us via mail: <podcasts_for_all@yahoo.com>
 
 [MIT License]: http://mit-license.org/
-[contributors]: http://github.com/contributors
