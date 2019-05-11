@@ -28,19 +28,6 @@ genres.genresById = genresData.createPodcastGenresById(genres.genres);
 const manifest = {
 	id: "community.StremioPodcust",
 	version: "0.0.1",
-	sorts: [{
-		prop: "bla",
-		name: "Twitch.tv",
-		types: ["tv"]
-	}],
-	filter: {
-		"query.twitch_id": {
-			"$exists": true
-		},
-		"query.type": {
-			"$in": ["tv"]
-		}
-	},
 	catalogs: [{
 		type: "Podcasts",
 		id: "poducsts",
@@ -55,8 +42,8 @@ const manifest = {
 	types: [
 		"series"
 	],
-	name: "top",
-	description: "Listen to amazing podcust of all types and all languages "
+	name: "All Podcasts :)",
+	description: "Listen to the best podcastes- HQ, all genres, all languages! (Powered by LISTEN NOTES)"
 };
 const builder = new addonBuilder(manifest);
 

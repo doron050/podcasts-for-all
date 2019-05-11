@@ -50,37 +50,38 @@ function episodesToVideos(episodes) {
     return (videos);
 }
 
-async function podcastToSeries(podcast){
+async function podcastToSeries(podcast) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
-	let series = {
-		id: podcast.id,
-		type: "series",
-		name: podcast.title,
-		poster: podcast.thumbnail,
-		//genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
-		posterShape: "landscape",
-		background: podcast.image,
-		logo: constants.PODCAST_LOGO,
-		description: podcast.description,
-		releaseInfo: (new Date(podcast.earliest_pub_date_ms)).getFullYear() + "-" + (new Date(podcast.latest_pub_date_ms)).getFullYear(),
-		director: [podcast.publisher],
-		//imdbRating: 10,
-		//dvdRelease: "",
-		released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
-		inTheaters: true,
-		//videos: episodesAsVideos.asArray,
+    let series = {
+        id: podcast.id,
+        type: "series",
+        name: podcast.title,
+        poster: podcast.thumbnail,
+        //genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
+        genres: generateBasicGenres(podcast),
+        posterShape: "landscape",
+        background: podcast.image,
+        logo: constants.PODCAST_LOGO,
+        description: podcast.description,
+        releaseInfo: generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms),
+        director: [podcast.publisher],
+        //imdbRating: 10,
+        //dvdRelease: "",
+        released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
+        inTheaters: true,
+        //videos: episodesAsVideos.asArray,
         certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
         //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
-		language: podcast.language,
-		country: podcast.country,
-		awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
-		website: podcast.website
-    };
-    
+        language: podcast.language,
+        country: podcast.country,
+        awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
+        website: podcast.website
+    }
+
     // Sets series parameters if there is episodes to the podcast
-    if (podcast.episodes){
+    if (podcast.episodes) {
         const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
         series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
