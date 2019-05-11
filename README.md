@@ -23,12 +23,18 @@
 
 > *Podcasts* - `have fun`, `be smart`.
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
+
 ## Key Features
 
 * Best podcasts catalog worldwide
 * Podcast catalog by genre
 * Search for podcasts
 * Stream HQ audio right to your device
+
+![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg")
+![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg")
 
 ## Setup
 
