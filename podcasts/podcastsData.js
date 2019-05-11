@@ -197,7 +197,26 @@ function getEpisodeById(id) {
         }));
 }
 
+async function getAllEpisodesForPodcast(podcast){
+    const episodes = [];
+    episodes.push(...podcast.episodes);
+    let nextEpisodePubDate = podcast.next_episode_pub_date;
+
+    while (nextEpisodePubDate) {
+        const results = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + podcast.id, {
+            params: {
+                next_episode_pub_date: nextEpisodePubDate,
+            }});
+
+        nextEpisodePubDate = results.data.next_episode_pub_date;
+        episodes.push(...results.data.episodes)
+    }
+
+    return episodes;
+}
+
 module.exports = {
+    getAllEpisodesForPodcast,
     searchPodcasts,
     getBestPodcasts,
     getBestPodcastsWithEpisodes,
