@@ -19,14 +19,18 @@ const LOG_MESSAGES = {
     SUCCESS_FIND_GENRE_BY_ID: "Success- Find match genre (by genre name): ",
     SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES: "Success- Translate genre ids to names: ",
     SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS: "Success- Translate genre names to ids: ",
+    SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES: "Success- Translate countries codes to names: ",
+    SUCCESS_GET_FEELING_LUCKY: "Success- Get feeling lucky result: ",
     ERROR_GET_BEST_PODCASTS: "Error- get best podcasts! Error: ",
     ERROR_SEARCH_PODCASTS: "Error- search podcasts! Error: ",
     ERROR_GET_PODCAST_BY_ID: "Error- get podcast by id! Error: ",
     ERROR_GET_EPISODE_BY_ID: "Error- get episode by id! Error: ",
+    ERROR_FEELING_LUCKY: "Error- get feeling lucky! Error: ",
     START_CATALOG_HANDLER: "Handler: Catalog | ",
     SEARCH_ON_CATALOG_HANDLER: "Search available: ",
     START_META_HANDLER: "Handler: Meta | ",
     START_STREAM_HANDLER: "Handler: Stream | ",
+    START_FEELING_LUCKY: "Start get feeling lucky",
     ON_GOING_HANDLE_WITH_PROMISES: "Not all promises 'getPodcastById' completed yet. More to go: ",
     END_HANDLE_WITH_PROMISES: "All promises handled: ",
     INIT_GENRES_BY_ID_OBJECT: "Done! Create genres object. Num of genres: "
@@ -39,7 +43,8 @@ const PODCASTS_DATA_API_ROUTES = {
     PODCAST_BY_ID: "/api/v2/podcasts/",
     EPISODE_BY_ID: "/api/v2/episodes/",
     BEST_PODCASTS: "/api/v2/best_podcasts",
-    GENRES: "/api/v2/genres"
+    GENRES: "/api/v2/genres",
+    FEELING_LUCKY: "/api/v2/just_listen"
 }
 
 const PODCASTS_API_KEY = {
@@ -61,6 +66,23 @@ const ID_PREFIX = "ap";
 const CONTACT_EMAIL = "nmahnovsky@gmail.com";
 const ADDON_LOGO = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png?raw=true";
 const ADDON_BACKGROUND = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_background.jpg?raw=true";
+
+const CATALOGS = {
+    TYPE: "Podcasts",
+    BY_GENRE: {
+        ID: 'byGenre',
+        NAME: 'Genres'
+    },
+    BY_COUNTRY: {
+        ID: 'byCountry',
+        NAME: 'Countries'
+    },
+    FEELING_LUCKY: {
+        ID: 'feelingLucky',
+        NAME: "I'm Feeling Lucky!",
+        GENRES: ["Good luck!"]
+    }
+}
 
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
@@ -102,6 +124,7 @@ const API_CONSTANTS = {
 }
 
 module.exports = {
+    CATALOGS,
     LOG_LEVEL,
     LOG_MESSAGES,
     PODCASTS_DATA_BASE_API_URL,

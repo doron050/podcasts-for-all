@@ -23,6 +23,7 @@ async function getBestPodcasts(skip, genreId, region) {
             params: {
                 page: internalPage,
                 genre_id: genre,
+                region: regionFilter
             }
         });
 
@@ -30,7 +31,7 @@ async function getBestPodcasts(skip, genreId, region) {
         canKeepPulling = result.data.has_next;
         internalPage++;
 
-    } while (podcasts.length < 70 && canKeepPulling);
+    } while (podcasts.length < 40 && canKeepPulling);
 
     logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;
@@ -164,7 +165,6 @@ function getPodcastById(id) {
     // For offset for pagination filter
     return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
             params: {
-                //next_episode_pub_date: "",
             }
         })
         .then(function (response) {
@@ -212,7 +212,25 @@ async function getAllEpisodesForPodcast(podcast){
         episodes.push(...results.data.episodes)
     }
 
-    return episodes;
+    return episodes.reverse();
+}
+
+function getFeelingLucky() {
+
+    logger.trace(constants.LOG_MESSAGES.START_FEELING_LUCKY);
+
+    // For offset for pagination filter
+    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.FEELING_LUCKY)
+        .then(function (response) {
+
+            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
+
+            return (response.data);
+        })
+        .catch(function (error) {
+
+            logger.error(constants.LOG_MESSAGES.ERROR_FEELING_LUCKY + error);
+        }));
 }
 
 module.exports = {
@@ -222,5 +240,6 @@ module.exports = {
     getBestPodcastsWithEpisodes,
     searchPodcastsWithEpisodes,
     getPodcastById,
-    getEpisodeById
+    getEpisodeById,
+    getFeelingLucky
 }

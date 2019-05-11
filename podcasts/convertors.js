@@ -54,6 +54,9 @@ async function podcastToSeries(podcast) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
+    let released = "";
+    if (podcast.earliest_pub_date_ms) released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
+
     let series = {
         id: constants.ID_PREFIX + podcast.id,
         type: "series",
@@ -65,11 +68,11 @@ async function podcastToSeries(podcast) {
         background: podcast.image,
         logo: constants.ADDON_LOGO,
         description: podcast.description,
-        releaseInfo: generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms),
+
         director: [podcast.publisher],
         //imdbRating: 10,
         //dvdRelease: "",
-        released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
+        released: released,
         inTheaters: true,
         //videos: episodesAsVideos.asArray,
         //certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
@@ -78,6 +81,10 @@ async function podcastToSeries(podcast) {
         country: podcast.country,
         awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
         website: podcast.website
+    }
+
+    if (podcast.earliest_pub_date_ms || podcast.latest_pub_date_ms) {
+        series.releaseInfo = generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms)
     }
 
     // Sets series parameters if there is episodes to the podcast
@@ -133,21 +140,24 @@ function generateAwards(explicit_content, is_claimed) {
 
 function generateBasicGenres(podcast) {
 
-    let basicGenres = [constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE,
-        "Number of Episodes: " + podcast.total_episodes,
-        //"Next Episode: " + new Date(oldestEpisodeTime),
-        "Country: " + podcast.country,
-        "Language: " + podcast.language
-    ]
+    let language = "Country: ";
+    let country = "Language: ";
+    let nextEpisode = "Next Episode: ";
+    let numOfEpisodes = "Number of Episodes: ";
 
-    if (podcast.explicit_content) basicGenres.push("*Include Explicit Contact")
+    let basicGenres = [constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE]
+
+    if (podcast.total_episodes) basicGenres.push(numOfEpisodes += podcast.total_episodes);
+    if (podcast.country) basicGenres.push(country += podcast.country);
+    if (podcast.language) basicGenres.push(language += podcast.language);
+    if (podcast.nextEpisode) basicGenres.push(nextEpisode += new Date(podcast.next_episode_pub_date).toDateString());
+    if (podcast.explicit_content) basicGenres.push("* Notice! Include Explicit Contact")
 
     return (basicGenres);
 }
 
 function generateReleaseInfo(oldestEpisodeTime, newestEpisodeTime) {
 
-    // The release info label shows years
     let oldestEpisodeYear = (new Date(oldestEpisodeTime)).getFullYear();
     let newestEpisosdeYear = (new Date(newestEpisodeTime)).getFullYear();
     let releaseInfo = oldestEpisodeYear + "-" + newestEpisosdeYear;
@@ -156,22 +166,26 @@ function generateReleaseInfo(oldestEpisodeTime, newestEpisodeTime) {
         releaseInfo = oldestEpisodeYear;
     }
 
+
     return (releaseInfo);
 }
 
 function podcastToSeriesVideo(podcast) {
 
-    return ({
+    let series = {
         id: podcast.id,
         title: podcast.title,
         thumbnail: podcast.thumbnail,
-        released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
         available: true,
         //season: 1,
         //episode: 1,
         trailer: podcast.youtube_url,
         overview: podcast.description
-    })
+    };
+
+    if (podcast.earliest_pub_date_ms) series.released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
+
+    return (series)
 }
 
 function getStreamsFromEpisode(episode) {
@@ -224,10 +238,26 @@ function getStreamsFromEpisode(episode) {
     return (streams);
 }
 
+function luckyPodcastToPodcast(luckyPodcast) {
+    var podcast = {
+        id: luckyPodcast.podcast_id,
+        title: luckyPodcast.podcast_title,
+        publisher: luckyPodcast.publisher,
+        explicit_content: luckyPodcast.explicit_content,
+        thumbnail: luckyPodcast.thumbnail,
+        image: luckyPodcast.image,
+        listennotes_url: luckyPodcast.listennotes_url,
+        description: "Lucky people go all the way in!"
+    }
+
+    return podcast;
+}
+
 module.exports = {
     episodesToVideos,
     podcastsToSerieses,
     podcastToSeries,
     podcastToSeriesVideo,
-    getStreamsFromEpisode
+    getStreamsFromEpisode,
+    luckyPodcastToPodcast
 };
