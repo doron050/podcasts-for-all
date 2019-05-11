@@ -13,7 +13,7 @@ function getCountriesStringsArray(countries) {
 
     logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES + countriesStringsArray.length);
 
-    return (countriesStringsArray)
+    return (countriesStringsArray.sort());
 }
 
 function findCountryId(countryName) {

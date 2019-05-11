@@ -5,8 +5,8 @@
       { "src": "*.js", "use": "@now/node-server" }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "server.js" },
-      { "src": "/static", "dest": "resources" }
+        { "src": "/static", "dest": "resources" },
+      { "src": "/(.*)", "dest": "server.js" }
     ],
     "env": {
         "LOG_LEVEL": "@log_level",

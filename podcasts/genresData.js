@@ -20,7 +20,7 @@ function getGenresStringsFromArray(ids){
      
     logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
 
-    return (genresStrings)
+    return (genresStrings.sort())
 }
 
 // Translate genre names to to ids

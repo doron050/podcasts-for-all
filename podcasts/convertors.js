@@ -140,18 +140,18 @@ function generateAwards(explicit_content, is_claimed) {
 
 function generateBasicGenres(podcast) {
 
-    let language = "Country: ";
-    let country = "Language: ";
-    let nextEpisode = "Next Episode: ";
-    let numOfEpisodes = "Number of Episodes: ";
+    let language = "<b>Country: </b>";
+    let country = "<b>Language: </b>";
+    let nextEpisode = "<b>Next Episode: </b>";
+    let numOfEpisodes = "<b>Number of Episodes: </b>";
 
-    let basicGenres = [constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE]
+    let basicGenres = ["<em>" + constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE + "</em>"]
 
     if (podcast.total_episodes) basicGenres.push(numOfEpisodes += podcast.total_episodes);
     if (podcast.country) basicGenres.push(country += podcast.country);
     if (podcast.language) basicGenres.push(language += podcast.language);
     if (podcast.nextEpisode) basicGenres.push(nextEpisode += new Date(podcast.next_episode_pub_date).toDateString());
-    if (podcast.explicit_content) basicGenres.push("* Notice! Include Explicit Contact")
+    if (podcast.explicit_content) basicGenres.push("<b><var>* Notice! Explicit Contact</var></b>")
 
     return (basicGenres);
 }

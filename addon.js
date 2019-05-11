@@ -29,7 +29,7 @@ genres.genresById = genresData.createPodcastGenresById(genres.genres);
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
 const manifest = {
 	id: "community.StremioPodcust",
-	version: "1.0.1",
+	version: process.env.VERSION,
 	catalogs: [{
 			type: constants.CATALOGS.TYPE,
 			id: constants.CATALOGS.BY_GENRE.ID,
@@ -72,7 +72,7 @@ const manifest = {
 	contactEmail: constants.CONTACT_EMAIL,
 	logo: constants.ADDON_LOGO,
 	background: constants.ADDON_BACKGROUND,
-	description: "Listen to the best podcasts- HQ, all genres, all languages and alot of advanced features! (Powered by LISTEN NOTES)."
+	description: "Stream the best and most verstile HQ Podcasts- It will be a great listening experience! (Powered by LISTEN NOTES)"
 };
 const builder = new addonBuilder(manifest);
 
