@@ -13,7 +13,6 @@ async function getBestPodcasts(skip, genreId, region) {
     let regionFilter = constants.API_CONSTANTS.DEFAULT_REGION;
     if (region) regionFilter = region;
 
-
     let podcasts = [];
     let canKeepPulling = true;
     let internalPage = skip/podcastPerRequest + 1;
@@ -38,7 +37,6 @@ async function getBestPodcasts(skip, genreId, region) {
 }
 
 async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
-
     logger.trace(constants.LOG_MESSAGES.START_SEARCH_PODCASTS + searchTerm);
 
     // For offset for pagination filter
@@ -59,7 +57,6 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
         });
 
         logger.trace(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
-
         return result.data.results;
     }
     catch (e) {
@@ -83,22 +80,18 @@ async function getPodcastById(id, params = {}) {
     }
 }
 
-function getEpisodeById(id) {
-
+async function getEpisodeById(id) {
     logger.trace(constants.LOG_MESSAGES.START_GET_EPISODE_BY_ID + id);
 
     // For offset for pagination filter
-    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id)
-        .then(function (response) {
-
-            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
-
-            return (response.data);
-        })
-        .catch(function (error) {
-
-            logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
-        }));
+    try {
+        const response = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id);
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
+        return response.data;
+    }
+    catch (e) {
+        logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + error);
+    }
 }
 
 async function getAllEpisodesForPodcast(podcast){
