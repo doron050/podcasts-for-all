@@ -7,5 +7,9 @@
     "routes": [
       { "src": "/addon", "dest": "addon.js" },
       { "src": "/(.*)", "dest": "server.js" }
-    ]
+    ],
+    "env": {
+        "LOG_LEVEL": "@LOG_LEVEL",
+        "PODCASTS_API_KEY": "@PODCASTS_API_KEY"
+    }
   }
