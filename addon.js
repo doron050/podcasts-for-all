@@ -62,7 +62,7 @@ const builder = new addonBuilder(manifest);
 
 // Addon handlers
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
-builder.defineCatalogHandler(({
+builder.defineCatalogHandler(async ({
 	type,
 	id,
 	extra
@@ -92,22 +92,17 @@ builder.defineCatalogHandler(({
 			})
 		)
 	} else {
-		return (
-			podcastsData.getBestPodcasts(extra.skip ? extra.skip :  0, genre).then(function (podcasts) {
-
-				
-				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray;
-
-				return {
-					metas: finalPodcasts
-				}
-			})
-		)
+		const podcasts = await podcastsData.getBestPodcasts(extra.skip ? extra.skip :  0, genre);
+		const serieses = await convertors.podcastsToSerieses(podcasts);
+		let finalPodcasts =	serieses.asArray;
+		return {
+			metas: finalPodcasts
+		};
 	}
-})
+});
 
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineMetaHandler.md
-builder.defineMetaHandler(({
+builder.defineMetaHandler(async ({
 	type,
 	id
 }) => {
@@ -115,13 +110,13 @@ builder.defineMetaHandler(({
 	logger.debug(constants.LOG_MESSAGES.START_META_HANDLER + "type: " + type + " & id: " + id);
 
 	//currentPoducastId = id;
-	return (podcastsData.getPodcastById(id).then(function (podcast) {
+	const podcast = await podcastsData.getPodcastById(id);
 
-		return ({
-			meta: convertors.podcastToSeries(podcast)
-		});
-	}));
-})
+	return {
+		meta: await convertors.podcastToSeries(podcast)
+	};
+
+});
 
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
 builder.defineStreamHandler(({

@@ -50,11 +50,11 @@ function episodesToVideos(episodes){
     return (videos);
 }
 
-function podcastToSeries(podcast){
+async function podcastToSeries(podcast){
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
-	var series = {
+	let series = {
 		id: podcast.id,
 		type: "series",
 		name: podcast.title,
@@ -77,39 +77,45 @@ function podcastToSeries(podcast){
 		country: podcast.country,
 		awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
 		website: podcast.website
-    }
+    };
     
     // Sets series parameters if there is episodes to the podcast
     if (podcast.episodes){
+        const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
         series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
 
-        let episodesAsVideos = episodesToVideos(podcast.episodes);
+        let episodesAsVideos = episodesToVideos(allEpisodes);
         series.videos = episodesAsVideos.asArray;
 
         // Adds extra field on the series (the episodes / videos by id)
         series.videosById = episodesAsVideos.asObjectById;
     }
 
-    return (series);
+    return series;
 }
 
-function podcastsToSerieses(podcasts, simpleGenre){
+async function podcastsToSerieses(podcasts, simpleGenre){
 
     let serieses = {
         asArray: [],
         asObjectById: {}
     };
 
-    podcasts.forEach(podcast => {
-        
-        let currentSeries = podcastToSeries(podcast);
+    for (let i=0;i<podcasts.length;i++){
+        let currentSeries = await podcastToSeries(podcasts[i]);
 
         serieses.asArray.push(currentSeries);
-        serieses.asObjectById[podcast.id] = currentSeries;
-    });
+        serieses.asObjectById[podcasts[i].id] = currentSeries;
+    }
 
-    return (serieses);
+    return serieses;
+}
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
 }
 
 function generateAwards(explicit_content, is_claimed){
