@@ -80,10 +80,10 @@ builder.defineCatalogHandler(async ({
 	if (extra.search) {
 		logger.debug(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
 		const podcasts = await podcastsData.searchPodcasts(extra.search);
-		let finalPodcasts = await convertors.podcastsToSerieses(podcasts).asArray;
+		const Serieses = await convertors.podcastsToSerieses(podcasts);
 
 		return {
-			metas: finalPodcasts
+			metas: Serieses.asArray
 		};
 	}
 	else {
