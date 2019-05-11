@@ -30,7 +30,7 @@ async function getBestPodcasts(skip, genreId, region) {
         canKeepPulling = result.data.has_next;
         internalPage++;
 
-    } while (podcasts.length < 100 && canKeepPulling);
+    } while (podcasts.length < 70 && canKeepPulling);
 
     logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;

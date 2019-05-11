@@ -50,6 +50,7 @@ function episodesToVideos(episodes) {
     return (videos);
 }
 
+<<<<<<< HEAD
 async function podcastToSeries(podcast) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
@@ -82,6 +83,39 @@ async function podcastToSeries(podcast) {
 
     // Sets series parameters if there is episodes to the podcast
     if (podcast.episodes) {
+=======
+async function podcastToSeries(podcast){
+
+    logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
+
+	let series = {
+		id: podcast.id,
+		type: "series",
+		name: podcast.title,
+		poster: podcast.thumbnail,
+		//genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
+		posterShape: "landscape",
+		background: podcast.image,
+		logo: constants.PODCAST_LOGO,
+		description: podcast.description,
+		releaseInfo: (new Date(podcast.earliest_pub_date_ms)).getFullYear() + "-" + (new Date(podcast.latest_pub_date_ms)).getFullYear(),
+		director: [podcast.publisher],
+		//imdbRating: 10,
+		//dvdRelease: "",
+		released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
+		inTheaters: true,
+		//videos: episodesAsVideos.asArray,
+        certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
+        //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
+		language: podcast.language,
+		country: podcast.country,
+		awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
+		website: podcast.website
+    };
+    
+    // Sets series parameters if there is episodes to the podcast
+    if (podcast.episodes){
+>>>>>>> b0ab8a055c60ff9106cc72e59b34891126af025d
         const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
         series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
@@ -97,7 +131,10 @@ async function podcastToSeries(podcast) {
 }
 
 async function podcastsToSerieses(podcasts, simpleGenre){
+<<<<<<< HEAD
 
+=======
+>>>>>>> b0ab8a055c60ff9106cc72e59b34891126af025d
     let serieses = {
         asArray: [],
         asObjectById: {}
@@ -111,12 +148,6 @@ async function podcastsToSerieses(podcasts, simpleGenre){
     }
 
     return serieses;
-}
-
-async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-        await callback(array[index], index, array);
-    }
 }
 
 function generateAwards(explicit_content, is_claimed) {
