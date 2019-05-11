@@ -18,7 +18,7 @@ function getGenresStringsFromArray(ids){
         genresStrings.push(genresById[id].name.replace(" & ", " and "));
     }
      
-    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
+    logger.trace(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
 
     return (genresStrings.sort())
 }
@@ -33,7 +33,7 @@ function getGenresIdsFromArray(genres){
         genresIds.push(genre.id);
     });
 
-    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length);
+    logger.trace(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length);
     
     return (getGenresStringsFromArray(genresIds));
 }

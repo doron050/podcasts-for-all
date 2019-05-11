@@ -20,7 +20,7 @@ const countries = require("./podcasts/countries");
 const genresData = require("./podcasts/genresData");
 const countriesData = require("./podcasts/countriesData");
 
-logger.info(constants.LOG_MESSAGES.START_ADDON + "Version: " + process.env.VERSION);
+logger.info(constants.LOG_MESSAGES.START_ADDON + " Version: " + process.env.VERSION);
 
 // Usibility counters
 let usibilityCounters = {
