@@ -37,52 +37,6 @@ async function getBestPodcasts(skip, genreId, region) {
     return podcasts;
 }
 
-function getBestPodcastsWithEpisodes(page, genreId, region) {
-
-    let podcastsWithEpisodes = [];
-    let podcastsByIdPromises = [];
-    let counterPomisesByIdDone = 0;
-    let numberOfPodcasts;
-
-    return (
-        getBestPodcasts(page, genreId, region).then(function (podcasts) {
-
-            if (podcasts)numberOfPodcasts = podcasts.length;
-            else podcasts = [];
-            
-            podcasts.forEach(podcast => {
-
-                getPodcastById(podcast.id).then(function (podcastWithEpisodes) {
-
-                    podcastsWithEpisodes.push(podcastWithEpisodes);
-                    counterPomisesByIdDone++;
-                });
-
-            });
-        }).then(function () {
-
-            var podcastsWithEpisodesPromise = new Promise(function (resolve, reject) {
-
-                let intervalA = setInterval(function () {
-
-                    // Checks if all promises of getting podcast by id as done
-                    if (counterPomisesByIdDone == numberOfPodcasts) {
-
-                        logger.trace(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
-
-                        clearInterval(intervalA);
-                        resolve(podcastsWithEpisodes)
-                    } else {
-
-                        logger.trace(constants.LOG_MESSAGES.ON_GOING_HANDLE_WITH_PROMISES + (numberOfPodcasts - counterPomisesByIdDone));
-                    }
-                }, 500);
-            });
-            // Returns a promise that will resolve when all the requests to get data about podcasts by id will be done
-            return (podcastsWithEpisodesPromise)
-        }));
-}
-
 async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
 
     logger.trace(constants.LOG_MESSAGES.START_SEARCH_PODCASTS + searchTerm);
@@ -112,6 +66,7 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
         logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + e);
     }
 }
+
 
 function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
 
@@ -158,14 +113,12 @@ function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
         }));
 }
 
-function getPodcastById(id) {
-
+function getPodcastById(id, params = {}) {
     logger.trace(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id);
 
     // For offset for pagination filter
-    return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
-            params: {
-            }
+    return constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
+            params
         })
         .then(function (response) {
 
@@ -176,7 +129,7 @@ function getPodcastById(id) {
         .catch(function (error) {
 
             logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
-        }));
+        });
 }
 
 function getEpisodeById(id) {
@@ -203,10 +156,9 @@ async function getAllEpisodesForPodcast(podcast){
     let nextEpisodePubDate = podcast.next_episode_pub_date;
 
     while (nextEpisodePubDate) {
-        const results = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + podcast.id, {
-            params: {
-                next_episode_pub_date: nextEpisodePubDate,
-            }});
+        const results = await getPodcastById(podcast.id, {
+            next_episode_pub_date: nextEpisodePubDate,
+        });
 
         nextEpisodePubDate = results.data.next_episode_pub_date;
         episodes.push(...results.data.episodes)
@@ -237,8 +189,6 @@ module.exports = {
     getAllEpisodesForPodcast,
     searchPodcasts,
     getBestPodcasts,
-    getBestPodcastsWithEpisodes,
-    searchPodcastsWithEpisodes,
     getPodcastById,
     getEpisodeById,
     getFeelingLucky
