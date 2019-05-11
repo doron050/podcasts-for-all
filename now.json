@@ -10,6 +10,6 @@
     ],
     "env": {
         "LOG_LEVEL": "@log_level",
-        "PODCASTS_API_KEY": "@podcast_api_key"
+        "PODCASTS_API_KEY": "@podcasts_api_key"
     }
   }
