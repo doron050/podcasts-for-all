@@ -58,7 +58,7 @@
 * Go to <a href="https://www.listennotes.com/api/">Listen Notes API</a> :page_facing_up:
 * Create new **_account_** and save your **_API_KEY_** :memo:
 * Now it's time for some preperation
-```bash
+```bash 
 # Clone this repository
 $ https://github.com/NivM1/podcasts-for-all.git
 
