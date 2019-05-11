@@ -32,8 +32,6 @@ const LOG_MESSAGES = {
     INIT_GENRES_BY_ID_OBJECT: "Done! Create genres object. Num of genres: "
 }
 
-const PODCAST_LOGO = "https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/podcast-2-512.png";
-
 const PODCASTS_DATA_BASE_API_URL = "https://listen-api.listennotes.com"
 
 const PODCASTS_DATA_API_ROUTES = {
@@ -93,14 +91,19 @@ const API_CONSTANTS = {
         RSS_STREAM_TITLE: "RSS Feed",
         WEBSITE_STREAM_TITLE: "Website",
         SPOTIFY_STREAM_TITLE: "Spotify",
-        YOUTUBE_STREAM_TITLE: "Youtube (built-in player)"
-    }
+        YOUTUBE_STREAM_TITLE: "Youtube (built-in player)",
+        TWITTER_STREAM_TITLE: "Twitter",
+        FACEBOOK_STREAM_TITLE: "Facebook",
+        INSTAGRAM_STREAM_TITLE: "Instagram"
+    },
+    FACEBOOK_BASE_URL: "https://www.facebook.com/",
+    TWEETER_BASE_URL: "https://www.tweeter.com/",
+    INSTAGRAM_BAE_URL: "https://www.instagram.com/"
 }
 
 module.exports = {
     LOG_LEVEL,
     LOG_MESSAGES,
-    PODCAST_LOGO,
     PODCASTS_DATA_BASE_API_URL,
     PODCASTS_DATA_API_ROUTES,
     PODCASTS_API_KEY,

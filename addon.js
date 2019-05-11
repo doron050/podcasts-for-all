@@ -115,36 +115,7 @@ builder.defineStreamHandler(({
 
 	return (podcastsData.getEpisodeById(id).then(function (episode) {
 
-		let streams = [{
-			url: episode.audio,
-			title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
-		},
-		{
-			externalUrl: episode.listennotes_url,
-			title: constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE
-		}];
-
-		if (episode.podcast.website) streams.push({
-			externalUrl: episode.podcast.website,
-			title: constants.API_CONSTANTS.STREAMS_TITLES.WEBSITE_STREAM_TITLE
-		});
-
-		if (episode.podcast.rss) streams.push({
-			externalUrl: episode.podcast.rss,
-			title: constants.API_CONSTANTS.STREAMS_TITLES.RSS_STREAM_TITLE
-		});
-
-		if (episode.podcast.extra.youtube_url) streams.push({
-			ytid: episode.podcast.extra.youtube_url.split("?v=")[1],
-			title: constants.API_CONSTANTS.STREAMS_TITLES.YOUTUBE_STREAM_TITLE
-		});
-
-		if (episode.podcast.extra.spotify_url) streams.push({
-			externalUrl: episode.podcast.extra.spotify_url,
-			title: constants.API_CONSTANTS.STREAMS_TITLES.SPOTIFY_STREAM_TITLE
-		});
-
-		return ({streams: streams})
+		return ({streams: convertors.getStreamsFromEpisode(episode)})
 	}));
 });
 

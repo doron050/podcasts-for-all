@@ -61,9 +61,9 @@ async function podcastToSeries(podcast) {
         poster: podcast.thumbnail,
         //genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
         genres: generateBasicGenres(podcast),
-        posterShape: "landscape",
+        posterShape: "regular",
         background: podcast.image,
-        logo: constants.PODCAST_LOGO,
+        logo: constants.ADDON_LOGO,
         description: podcast.description,
         releaseInfo: generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms),
         director: [podcast.publisher],
@@ -72,7 +72,7 @@ async function podcastToSeries(podcast) {
         released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
         inTheaters: true,
         //videos: episodesAsVideos.asArray,
-        certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
+        //certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
         //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
         language: podcast.language,
         country: podcast.country,
@@ -83,7 +83,7 @@ async function podcastToSeries(podcast) {
     // Sets series parameters if there is episodes to the podcast
     if (podcast.episodes) {
         const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
-        series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes";
+        series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " min     | ";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
 
         let episodesAsVideos = episodesToVideos(allEpisodes);
@@ -96,13 +96,13 @@ async function podcastToSeries(podcast) {
     return series;
 }
 
-async function podcastsToSerieses(podcasts, simpleGenre){
+async function podcastsToSerieses(podcasts, simpleGenre) {
     let serieses = {
         asArray: [],
         asObjectById: {}
     };
 
-    for (let i=0;i<podcasts.length;i++){
+    for (let i = 0; i < podcasts.length; i++) {
         let currentSeries = await podcastToSeries(podcasts[i]);
 
         serieses.asArray.push(currentSeries);
@@ -135,7 +135,9 @@ function generateBasicGenres(podcast) {
 
     let basicGenres = [constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE,
         "Number of Episodes: " + podcast.total_episodes,
-        "Country: " + podcast.country, "Language: " + podcast.language
+        //"Next Episode: " + new Date(oldestEpisodeTime),
+        "Country: " + podcast.country,
+        "Language: " + podcast.language
     ]
 
     if (podcast.explicit_content) basicGenres.push("*Include Explicit Contact")
@@ -172,9 +174,60 @@ function podcastToSeriesVideo(podcast) {
     })
 }
 
+function getStreamsFromEpisode(episode) {
+
+    let streams = [{
+            url: episode.audio,
+            title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
+        },
+        {
+            externalUrl: episode.listennotes_url,
+            title: constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE
+        }
+    ];
+
+    if (episode.podcast.website) streams.push({
+        externalUrl: episode.podcast.website,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.WEBSITE_STREAM_TITLE
+    });
+
+    if (episode.podcast.rss) streams.push({
+        externalUrl: episode.podcast.rss,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.RSS_STREAM_TITLE
+    });
+
+    if (episode.podcast.extra.youtube_url) streams.push({
+        ytid: episode.podcast.extra.youtube_url.split("?v=")[1],
+        title: constants.API_CONSTANTS.STREAMS_TITLES.YOUTUBE_STREAM_TITLE
+    });
+
+    if (episode.podcast.extra.spotify_url) streams.push({
+        externalUrl: episode.podcast.extra.spotify_url,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.SPOTIFY_STREAM_TITLE
+    });
+
+    if (episode.podcast.extra.facebook_handle) streams.push({
+        externalUrl: constants.API_CONSTANTS.FACEBOOK_BASE_URL + episode.podcast.extra.facebook_handle,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.FACEBOOK_STREAM_TITLE
+    });
+
+    if (episode.podcast.extra.twitter_handle) streams.push({
+        externalUrl: constants.API_CONSTANTS.TWITTER_BASE_URL + episode.podcast.extra.twitter_handle,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.TWITTER_STREAM_TITLE
+    });
+
+    if (episode.podcast.extra.instagram_handle) streams.push({
+        externalUrl: constants.API_CONSTANTS.INSTAGRAM_BASE_URL + episode.podcast.extra.instagram_handle,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.INSTAGRAM_STREAM_TITLE
+    });
+
+    return (streams);
+}
+
 module.exports = {
     episodesToVideos,
     podcastsToSerieses,
     podcastToSeries,
-    podcastToSeriesVideo
+    podcastToSeriesVideo,
+    getStreamsFromEpisode
 };
