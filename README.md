@@ -36,7 +36,7 @@
 ## Key Features
 
 * Best podcasts worldwide (smart filters and ordering) :trophy:
-  * All types
+  * All genres & types
   * All languages & regions :european_castle: :tokyo_tower:
 * Podcast catalogs: :file_folder:
   * Top Podcasts
@@ -79,10 +79,10 @@ $ npm install
 +# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
 ```
 
-* Run your addon server using `npm start`
+* Run your addon local server using `npm start`
 * Install it on your StremIO app (web / desktop) :computer:
-  * The addon available here: <http://127.0.0.1:56960/manifest.json>
-* Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your podcasts!** :trumpet:
+  * The addon will be available here: <http://127.0.0.1:56960/manifest.json>
+* Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
 Thanks
