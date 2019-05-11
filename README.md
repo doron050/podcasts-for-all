@@ -8,7 +8,7 @@
 <h4 align="center">Stream the Best Podcasts Listening Experience to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
 
 <p align="center">
-  <a href="https://paypal.me/">
+  <a href="https://paypal.me/doron050">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
 </p>
@@ -28,7 +28,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 
 > **We are making our best efforts** to bring you the best podcasts resources.<br/>
-> If you like our addon, you can help us by <a href="https://paypal.me/">donate and become a backer</a>.
+> If you like our addon, you can help us by <a href="https://paypal.me/doron050">donate and become a backer</a>.
 
 ## Our Vision
 > Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - StremIO
