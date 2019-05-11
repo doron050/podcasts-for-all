@@ -28,12 +28,26 @@
 
 ## Key Features
 
-* Best podcasts catalog worldwide
-* Podcast catalog by genre
+* Best podcasts worldwide (smart filters and ordering)
+  * All types
+  * All languages & regions
+* Podcast catalogs:
+  * Top Podcasts
+  * By Genres
+  * By Country
+  * Felling Luckey - Random podcast
 * Search for podcasts
+* Extra details
+  * Podcast length
+  * Podcast website
+  * Social Platforms refrences (Facebook, Spotify and more)
 * Stream HQ audio right to your device
+  * Cast the podcast to available devices
 
+#### Screenshot - Main Podcasts Catalog
 ![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
+
+#### Screenshot - Select Episode
 ![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
 
 ## Setup
