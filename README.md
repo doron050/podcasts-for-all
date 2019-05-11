@@ -14,11 +14,12 @@
 </p>
 
 <p align="center">
-  <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a> •
-  <a href="https://www.stremio.com/competition">Add-On Master</a> •
-  <a href="#Setup-for-Development">Setup for Dev</a> •
-  <a href="#Key-Features">Key Features</a> •
-  <a href="#Our-Vision">Our Vision</a> •
+  • <a href="#Our-Vision">Our Vision</a> 
+  • <a href="#Key-Features">Key Features</a>
+  • <a href="#Setup-for-Development">Setup for Dev</a>
+  • <a href="https://www.stremio.com/competition">Add-On Master</a>
+  • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
+  
 </p>
 
 > *Podcasts For All* - `have fun`, `be smart`.
