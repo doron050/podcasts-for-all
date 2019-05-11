@@ -1,12 +1,16 @@
 {
     "version": 2,
-    "builds": [
-        { "src": "serverless.js", "use": "@now/node" }
-    ],
+    "builds": [{
+        "src": "server.js",
+        "use": "@now/node-server"
+    }],
     "routes": [
-        { "src": "/.*", "dest": "/serverless.js" }
+        {
+            "src": "/(.*)",
+            "dest": "server.js"
+        }
     ],
-    "env": { 
+    "env": {
         "VERSION": "@version",
         "LOG_LEVEL": "@log_level",
         "PODCASTS_API_KEY": "@podcasts_api_key"
