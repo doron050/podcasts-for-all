@@ -1,12 +1,11 @@
 <h1 align="center">
+  <img src="https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png" alt="Podcast For All" width="150"></a>
   <br>
-  <img src="https://www.datarespons.com/wp-content/uploads/2019/01/podcast-icon.png" alt="StremioPodcast" width="150"></a>
-  <br>
-  StremioPodcast
+  Podcast For All
   <br>
 </h1>
 
-<h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">Stremio</a>.</h4>
+<h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
 
 <p align="center">
   <a href="paypal.me/">
