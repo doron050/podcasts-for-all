@@ -33,10 +33,9 @@ async function getBestPodcasts(skip, genreId, region) {
 
     } while (podcasts.length < 40 && canKeepPulling);
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
+    logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;
 }
-
 
 async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
 
@@ -59,7 +58,7 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
             }
         });
 
-        logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
 
         return result.data.results;
     }
@@ -68,8 +67,53 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     }
 }
 
-function getPodcastById(id, params = {}) {
 
+function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
+
+    let podcastsWithEpisodes = [];
+    let podcastsByIdPromises = [];
+    let counterPomisesByIdDone = 0;
+    let numberOfPodcasts;
+
+    return (
+        searchPodcasts(searchTerm, genreIds, offsetForPagination).then(function (podcasts) {
+
+            numberOfPodcasts = podcasts.length;
+
+            podcasts.forEach(podcast => {
+
+                getPodcastById(podcast.id).then(function (podcastWithEpisodes) {
+
+                    podcastsWithEpisodes.push(podcastWithEpisodes);
+                    counterPomisesByIdDone++;
+                });
+
+            });
+        }).then(function () {
+
+            var podcastsWithEpisodesPromise = new Promise(function (resolve, reject) {
+
+                let intervalA = setInterval(function () {
+
+                    // Checks if all promises of getting podcast by id as done
+                    if (counterPomisesByIdDone == numberOfPodcasts) {
+
+                        logger.trace(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
+
+                        clearInterval(intervalA);
+                        resolve(podcastsWithEpisodes)
+                    } else {
+
+                        logger.trace(constants.LOG_MESSAGES.ON_GOING_HANDLE_WITH_PROMISES + (numberOfPodcasts - counterPomisesByIdDone));
+                    }
+                }, 500);
+            });
+            // Returns a promise that will resolve when all the requests to get data about podcasts by id will be done
+            return (podcastsWithEpisodesPromise)
+        }));
+}
+
+function getPodcastById(id, params = {}) {
     logger.trace(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id);
 
     // For offset for pagination filter
@@ -78,7 +122,7 @@ function getPodcastById(id, params = {}) {
         })
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
 
             return (response.data);
         })
@@ -96,7 +140,7 @@ function getEpisodeById(id) {
     return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id)
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
 
             return (response.data);
         })
@@ -131,7 +175,7 @@ function getFeelingLucky() {
     return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.FEELING_LUCKY)
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
 
             return (response.data);
         })
