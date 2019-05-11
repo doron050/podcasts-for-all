@@ -84,7 +84,7 @@ Thanks
 Authored and maintained by DE, NM. with help from [contributors].
 
 
-> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [Niv M](https://github.com/nivm1) <br/>
 > GitHub [Doron Eli](https://github.com/doron050)
 
 [MIT License]: http://mit-license.org/
