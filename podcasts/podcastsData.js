@@ -33,7 +33,7 @@ async function getBestPodcasts(skip, genreId, region) {
 
     } while (podcasts.length < 40 && canKeepPulling);
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
+    logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
     return podcasts;
 }
 
@@ -68,7 +68,7 @@ function getBestPodcastsWithEpisodes(page, genreId, region) {
                     // Checks if all promises of getting podcast by id as done
                     if (counterPomisesByIdDone == numberOfPodcasts) {
 
-                        logger.info(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
+                        logger.trace(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
 
                         clearInterval(intervalA);
                         resolve(podcastsWithEpisodes)
@@ -104,7 +104,7 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
             }
         });
 
-        logger.debug(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_SEARCH_PODCASTS + result.data.results.length);
 
         return result.data.results;
     }
@@ -143,7 +143,7 @@ function searchPodcastsWithEpisodes(searchTerm, genreIds, offsetForPagination) {
                     // Checks if all promises of getting podcast by id as done
                     if (counterPomisesByIdDone == numberOfPodcasts) {
 
-                        logger.info(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
+                        logger.trace(constants.LOG_MESSAGES.END_HANDLE_WITH_PROMISES + counterPomisesByIdDone);
 
                         clearInterval(intervalA);
                         resolve(podcastsWithEpisodes)
@@ -169,7 +169,7 @@ function getPodcastById(id) {
         })
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
 
             return (response.data);
         })
@@ -187,7 +187,7 @@ function getEpisodeById(id) {
     return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.EPISODE_BY_ID + id)
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
 
             return (response.data);
         })
@@ -223,7 +223,7 @@ function getFeelingLucky() {
     return (constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.FEELING_LUCKY)
         .then(function (response) {
 
-            logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
+            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
 
             return (response.data);
         })

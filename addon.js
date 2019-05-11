@@ -20,7 +20,14 @@ const countries = require("./podcasts/countries");
 const genresData = require("./podcasts/genresData");
 const countriesData = require("./podcasts/countriesData");
 
-logger.info(constants.LOG_MESSAGES.START_ADDON);
+logger.info(constants.LOG_MESSAGES.START_ADDON + "Version: " + process.env.VERSION);
+
+// Usibility counters
+let usibilityCounters = {
+	catalogRequests: 0,
+	metaRequests: 0,
+	streamRequests: 0
+}
 
 // Init genrs objectk
 genres.genresById = genresData.createPodcastGenresById(genres.genres);
@@ -84,7 +91,9 @@ builder.defineCatalogHandler(async ({
 	extra
 }) => {
 
-	logger.debug(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "type: " + type + " & id: " + id);
+	usibilityCounters.catalogRequests++;
+
+	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ") Catalog Counter: " + usibilityCounters.catalogRequests);
 
 	let genre = 0;
 	let country = constants.API_CONSTANTS.DEFAULT_REGION;
@@ -110,7 +119,7 @@ builder.defineCatalogHandler(async ({
 
 	// If there is active search using search api instead of best podcasts api
 	if (extra.search) {
-		logger.debug(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
+		logger.trace(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
 		const podcasts = await podcastsData.searchPodcasts(extra.search);
 		const Serieses = await convertors.podcastsToSerieses(podcasts);
 
@@ -133,8 +142,9 @@ builder.defineMetaHandler(async ({
 	id
 }) => {
 
+	usibilityCounters.metaRequests++;
 
-	logger.debug(constants.LOG_MESSAGES.START_META_HANDLER + "type: " + type + " & id: " + id);
+	logger.trace(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ") Meta Counter: " + usibilityCounters.metaRequests);
 	id = id.replace(constants.ID_PREFIX, "");
 
 	//currentPoducastId = id;
@@ -151,7 +161,9 @@ builder.defineStreamHandler(({
 	type
 }) => {
 
-	logger.debug(constants.LOG_MESSAGES.START_STREAM_HANDLER + "type: " + type + " & id: " + id);
+	usibilityCounters.streamRequests++;
+
+	logger.trace(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests);
 	id = id.replace(constants.ID_PREFIX, "");
 
 	return (podcastsData.getEpisodeById(id).then(function (episode) {
