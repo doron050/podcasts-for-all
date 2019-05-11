@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center">Stream the Best Podcasts Listening Experience to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
+<h4 align="center">Stream the Best Podcasts Listening Experience to <a href="https://www.stremio.com/" target="_blank">Stremio</a></h4>
 
 <p align="center">
   <a href="https://paypal.me/doron050">
@@ -31,7 +31,7 @@
 > If you like our addon, you can help us by <a href="https://paypal.me/doron050">donate and become a backer</a>.
 
 ## Our Vision
-> Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - StremIO
+> Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - Stremio
 
 ## Key Features
 
