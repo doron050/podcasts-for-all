@@ -62,7 +62,7 @@ const ID_PREFIX = "ap";
 
 const CONTACT_EMAIL = "nmahnovsky@gmail.com";
 const ADDON_LOGO = "https://cdn4.iconfinder.com/data/icons/miu-hexagon-gloss-social/60/podcast-hexagon-gloss-social-media-512.png";
-const ADDON_BACKGROUND = "https://images.unsplash.com/photo-1487537023671-8dce1a785863?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60";
+const ADDON_BACKGROUND = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_background.jpg?raw=true";
 
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
