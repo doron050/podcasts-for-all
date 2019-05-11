@@ -16,9 +16,9 @@
 <p align="center">
   <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a> •
   <a href="https://www.stremio.com/competition">Add-On Master</a> •
-  <a href="#Setup">Setup</a> 
-  </a> •
-  <a href="#Key-Features">Key Features</a> 
+  <a href="#Setup-for-Development">Setup for Dev</a> •
+  <a href="#Key-Features">Key Features</a> •
+  <a href="#Our-Vision">Our Vision</a> •
 </p>
 
 > *Podcasts For All* - `have fun`, `be smart`.
@@ -56,7 +56,7 @@
 #### Screenshot - Select Episode:
 ![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
 
-## Setup
+## Setup for Development
 
 * Go to <a href="https://www.listennotes.com/api/">Listen Notes API</a> :page_facing_up:
 * Create new **_account_** and save your **_API_KEY_** :memo:
