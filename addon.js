@@ -82,9 +82,9 @@ builder.defineCatalogHandler(({
 
 		return (
 
-			podcastsData.searchPodcastsWithEpisodes(extra.search).then(function (podcasts) {
+			podcastsData.searchPodcasts(extra.search).then(function (podcasts) {
 
-				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray
+				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray;
 
 				return {
 					metas: finalPodcasts
