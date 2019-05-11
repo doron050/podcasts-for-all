@@ -43,10 +43,10 @@
 * Now it's time for some preperation
 ```bash
 # Clone this repository
-$ git clone https://github.com/NivM1/StremioPodcust.git
+$ https://github.com/NivM1/podcasts-for-all.git
 
 # Go into the repository
-$ cd StremioPodcust
+$ cd podcasts-for-all
 
 # Install dependencies
 $ npm install
@@ -57,19 +57,19 @@ $ npm install
 # LOG_LEVEL= [Logger level- such as: trace, debug, error...]
 ```
 
-* Run your addon using `???`
-* Try it out using your browser <https://staging.strem.io>
+* Run your addon using `npm start`
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and enjoy your podcasts!
+
 
 Thanks
 ------
 
-**StoryTeller** © 2019+, DE, NM Released under the [MIT License].<br>
+**Podcast For All** © 2019+, DE, NM Released under the [MIT License].<br>
 Authored and maintained by DE, NM. with help from [contributors].
 
-> [N.com](http://N.com) &nbsp;&middot;&nbsp;
-> GitHub [@N](https://github.com/N) &nbsp;&middot;&nbsp;
-> Twitter [@N](https://twitter.com/N)
+
+> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [Doron Eli](https://github.com/doron050)
 
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/contributors
