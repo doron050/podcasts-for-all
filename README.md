@@ -8,7 +8,7 @@
 <h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">StremIO</a></h4>
 
 <p align="center">
-  <a href="paypal.me/">
+  <a href="paypal.me/NivM1">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
 </p>
@@ -21,10 +21,13 @@
   <a href="#Key-Features">Key Features</a> 
 </p>
 
-> *Podcasts* - `have fun`, `be smart`.
+> *Podcasts For All* - `have fun`, `be smart`.
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
+
+> **We are making our best efforts** to bring you the best podcasts resources.<br/>
+> If you like our addon, you can help us by <a href=" paypal.me/NivM1"> donate</a>.
 
 ## Key Features
 
@@ -74,7 +77,7 @@ $ npm install
 * Run your addon server using `npm start`
 * Install it on your StreamIO app (web / desktop) :computer:
   * The addon available here: <http://127.0.0.1:56960/manifest.json>
-* Now go to <https://staging.strem.io/#/discover/Podcasts> and enjoy your podcasts! :trumpet:
+* Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your podcasts!** :trumpet:
 
 
 Thanks
