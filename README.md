@@ -67,11 +67,13 @@ $ npm install
 ```
 * Set your `.env` file like that:
 ```diff
-# PODCASTS_API_KEY= [Listen Notes API KEY]
-# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
++# PODCASTS_API_KEY= [Listen Notes API KEY]
++# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
 ```
 
-* Run your addon using `npm start`
+* Run your addon server using `npm start`
+* Install it on your StreamIO app (web / desktop)
+  * The addon available here: <http://127.0.0.1:56960/manifest.json>
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and enjoy your podcasts!
 
 
