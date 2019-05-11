@@ -79,19 +79,14 @@ builder.defineCatalogHandler(async ({
 	// If there is active search using search api instead of best podcasts api
 	if (extra.search) {
 		logger.debug(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
+		const podcasts = await podcastsData.searchPodcasts(extra.search);
+		let finalPodcasts = await convertors.podcastsToSerieses(podcasts).asArray;
 
-		return (
-
-			podcastsData.searchPodcasts(extra.search).then(function (podcasts) {
-
-				let finalPodcasts = convertors.podcastsToSerieses(podcasts).asArray;
-
-				return {
-					metas: finalPodcasts
-				}
-			})
-		)
-	} else {
+		return {
+			metas: finalPodcasts
+		};
+	}
+	else {
 		const podcasts = await podcastsData.getBestPodcasts(extra.skip ? extra.skip :  0, genre);
 		const serieses = await convertors.podcastsToSerieses(podcasts);
 		let finalPodcasts =	serieses.asArray;
