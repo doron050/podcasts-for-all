@@ -5,5 +5,10 @@
     ],
     "routes": [
         { "src": "/.*", "dest": "/serverless.js" }
-    ]
+    ],
+    "env": {
+        "VERSION": "@version",
+        "LOG_LEVEL": "@log_level",
+        "PODCASTS_API_KEY": "@podcasts_api_key"
+    }
 }
