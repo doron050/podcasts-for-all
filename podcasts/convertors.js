@@ -137,6 +137,19 @@ function generateGenres(podcastGenres){
     return (["drama", "history"])
 }
 
+function podcastToSeriesVideo(podcast){
 
+    return ({
+        id: "tt0108778:1:1",
+        title: "Pilot",
+        thumbnail: podcast.thumbnail,
+        released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
+        available: true,
+        //season: 1,
+        //episode: 1,
+        trailer: podcast.youtube_url,
+        overview: podcast.description
+    })
+};
 
-module.exports = {episodesToVideos, podcastsToSerieses, podcastToSeries};
+module.exports = {episodesToVideos, podcastsToSerieses, podcastToSeries, podcastToSeriesVideo};

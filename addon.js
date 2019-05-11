@@ -118,7 +118,8 @@ builder.defineMetaHandler(({
 	return (podcastsData.getPodcastById(id).then(function (podcast) {
 
 		return ({
-			meta: convertors.podcastToSeries(podcast)
+			meta: convertors.podcastToSeries(podcast),
+			video: convertors.podcastToSeriesVideo(podcast)
 		});
 	}));
 })
@@ -131,16 +132,38 @@ builder.defineStreamHandler(({
 
 	logger.debug(constants.LOG_MESSAGES.START_STREAM_HANDLER + "type: " + type + " & id: " + id);
 
-	// serve one stream to big buck bunny
-
-	//console.log("request for streams: " + currentPoducastId)
 	return (podcastsData.getEpisodeById(id).then(function (episode) {
 
-		return ({
-			streams: [{
-				url: episode.audio
-			}]
-		})
+		let streams = [{
+			url: episode.audio,
+			title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
+		},
+		{
+			externalUrl: episode.listennotes_url,
+			title: constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE
+		}];
+
+		if (episode.podcast.website) streams.push({
+			externalUrl: episode.podcast.website,
+			title: constants.API_CONSTANTS.STREAMS_TITLES.WEBSITE_STREAM_TITLE
+		});
+
+		if (episode.podcast.rss) streams.push({
+			externalUrl: episode.podcast.rss,
+			title: constants.API_CONSTANTS.STREAMS_TITLES.RSS_STREAM_TITLE
+		});
+
+		if (episode.podcast.extra.youtube_url) streams.push({
+			ytid: episode.podcast.extra.youtube_url.split("?v=")[1],
+			title: constants.API_CONSTANTS.STREAMS_TITLES.YOUTUBE_STREAM_TITLE
+		});
+
+		if (episode.podcast.extra.spotify_url) streams.push({
+			externalUrl: episode.podcast.extra.spotify_url,
+			title: constants.API_CONSTANTS.STREAMS_TITLES.SPOTIFY_STREAM_TITLE
+		});
+
+		return ({streams: streams})
 	}));
 })
 
