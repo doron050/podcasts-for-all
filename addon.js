@@ -27,7 +27,7 @@ genres.genresById = genresData.createPodcastGenresById(genres.genres);
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
 const manifest = {
 	id: "community.StremioPodcust",
-	version: "0.0.1",
+	version: "1.0.1",
 	catalogs: [{
 		type: "Podcasts",
 		id: "poducsts",
@@ -36,13 +36,13 @@ const manifest = {
 	}],
 	resources: [
 		"catalog",
-		"stream",
-		"meta"
+		{ name: 'stream', types: ['series'], idPrefixes: [constants.ID_PREFIX] },
+		{ name: 'meta', types: ['series'], idPrefixes: [constants.ID_PREFIX] }
 	],
 	types: [
 		"series"
 	],
-	name: "All Podcasts :)",
+	name: "Podcasts For All",
 	description: "Listen to the best podcastes- HQ, all genres, all languages! (Powered by LISTEN NOTES)"
 };
 const builder = new addonBuilder(manifest);
@@ -89,7 +89,9 @@ builder.defineMetaHandler(async ({
 	id
 }) => {
 
+	
 	logger.debug(constants.LOG_MESSAGES.START_META_HANDLER + "type: " + type + " & id: " + id);
+	id = id.replace(constants.ID_PREFIX, "");
 
 	//currentPoducastId = id;
 	const podcast = await podcastsData.getPodcastById(id);
@@ -106,6 +108,7 @@ builder.defineStreamHandler(({
 }) => {
 
 	logger.debug(constants.LOG_MESSAGES.START_STREAM_HANDLER + "type: " + type + " & id: " + id);
+	id = id.replace(constants.ID_PREFIX, "");
 
 	return (podcastsData.getEpisodeById(id).then(function (episode) {
 

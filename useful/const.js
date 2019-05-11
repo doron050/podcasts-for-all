@@ -58,6 +58,8 @@ const apiInstance = axios.create({
     }
 });
 
+const ID_PREFIX = "ap";
+
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
     DEFAULT_OFFSET: 0,
@@ -99,5 +101,6 @@ module.exports = {
     PODCASTS_DATA_API_ROUTES,
     PODCASTS_API_KEY,
     apiInstance,
-    API_CONSTANTS
+    API_CONSTANTS,
+    ID_PREFIX
 }

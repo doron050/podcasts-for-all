@@ -9,7 +9,7 @@ function episodeToVideo(episode, episodeNumber) {
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id);
 
     let video = {
-        id: episode.id,
+        id: constants.ID_PREFIX + episode.id,
         title: episode.title,
         released: (new Date(episode.pub_date_ms)).toISOString(),
         thumbnail: episode.thumbnail,
@@ -55,7 +55,7 @@ async function podcastToSeries(podcast) {
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
     let series = {
-        id: podcast.id,
+        id: constants.ID_PREFIX + podcast.id,
         type: "series",
         name: podcast.title,
         poster: podcast.thumbnail,
@@ -160,8 +160,8 @@ function generateReleaseInfo(oldestEpisodeTime, newestEpisodeTime) {
 function podcastToSeriesVideo(podcast) {
 
     return ({
-        id: "tt0108778:1:1",
-        title: "Pilot",
+        id: podcast.id,
+        title: podcast.title,
         thumbnail: podcast.thumbnail,
         released: (new Date(podcast.earliest_pub_date_ms)).toISOString(),
         available: true,
