@@ -67,23 +67,20 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     }
 }
 
-function getPodcastById(id, params = {}) {
+async function getPodcastById(id, params = {}) {
     logger.trace(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id);
 
     // For offset for pagination filter
-    return constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
+    try {
+        const response = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.PODCAST_BY_ID + id, {
             params
-        })
-        .then(function (response) {
-
-            logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
-
-            return (response.data);
-        })
-        .catch(function (error) {
-
-            logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
         });
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_PODCAST_BY_ID + response.data.id);
+        return response.data;
+    }
+    catch (e) {
+        logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + error);
+    }
 }
 
 function getEpisodeById(id) {
@@ -114,8 +111,8 @@ async function getAllEpisodesForPodcast(podcast){
             next_episode_pub_date: nextEpisodePubDate,
         });
 
-        nextEpisodePubDate = results.data.next_episode_pub_date;
-        episodes.push(...results.data.episodes)
+        nextEpisodePubDate = results.next_episode_pub_date;
+        episodes.push(...results.episodes)
     }
 
     return episodes.reverse();
