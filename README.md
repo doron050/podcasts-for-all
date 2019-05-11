@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-<h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">Stremio</a> and much more :)</h4>
+<h4 align="center">Stream the best podcasts to <a href="https://www.stremio.com/" target="_blank">Stremio</a></h4>
 
 <p align="center">
   <a href="paypal.me/">
