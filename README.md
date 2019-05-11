@@ -28,7 +28,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 
 > **We are making our best efforts** to bring you the best podcasts resources.<br/>
-> If you like our addon, you can help us by <a href="https://paypal.me/"> donate</a>.
+> If you like our addon, you can help us by <a href="https://paypal.me/">donate and become a backer</a>.
 
 ## Our Vision
 > Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - StremIO
@@ -86,11 +86,11 @@ $ npm install
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
-Thanks
+### Support and Contact
 ------
 
 **Podcast For All** © 2019+, DE, NM Released under the [MIT License].<br>
-Authored and maintained by DE, NM. with help from [contributors].
+Authored and maintained by DE, NM. with help from contributors.
 
 
 > GitHub [@Niv M](https://github.com/nivm1) <br/>
@@ -98,4 +98,3 @@ Authored and maintained by DE, NM. with help from [contributors].
 > Contact us via mail: <podcasts_for_all@yahoo.com>
 
 [MIT License]: http://mit-license.org/
-[contributors]: http://github.com/contributors
