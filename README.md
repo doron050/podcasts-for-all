@@ -50,6 +50,7 @@
   * Social Platforms refrences (Facebook, Spotify and more)
 * Stream HQ audio right to your device :headphones:
   * Cast the podcast to available devices
+* Powered by LISTEN NOTES API
 
 #### Screenshot - Main Podcasts Catalog:
 ![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
@@ -92,8 +93,9 @@ Thanks
 Authored and maintained by DE, NM. with help from [contributors].
 
 
-> GitHub [Niv M](https://github.com/nivm1) <br/>
-> GitHub [Doron Eli](https://github.com/doron050)
+> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [@Doron Eli](https://github.com/doron050)
+> Contact us via mail: <podcasts_for_all@yahoo.com>
 
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/contributors
