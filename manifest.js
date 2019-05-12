@@ -1,6 +1,8 @@
 const genres = require("./resources/genres");
 const genresData = require("./podcasts/genresData");
 const constants = require('./common/const');
+const countriesData = require("./podcasts/countriesData");
+const countries = require("./resources/countries");
 
 genres.genresById = genresData.createPodcastGenresById(genres.genres);
 
