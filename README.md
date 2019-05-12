@@ -17,6 +17,7 @@
   • <a href="#Our-Vision">Our Vision</a> 
   • <a href="#Key-Features">Key Features</a>
   • <a href="#How-to-Use">How to Use</a>
+   • <a href="#Support-and-Contact">Contact</a>
   • <a href="#Setup-for-Development">Setup for Dev</a>
   • <a href="https://www.stremio.com/competition">Add-On Master</a>
   • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
@@ -77,7 +78,7 @@
   * Get the `podcast RSS`
   * Get to know your podcast via his `social network accounts`
 * Now you are ready to go by yourself. Enjoy! :tada:
-> We hope you have _**the great Podcast Listening Experience of your life!_** :rainbow:
+> We hope you have _the great Podcast Listening Experience of your life!_ :rainbow:
 
 ## Setup for Development
 
