@@ -1,4 +1,4 @@
-const genres = require("./podcasts/genres");
+const genres = require("./resources/genres");
 const genresData = require("./podcasts/genresData");
 const constants = require('./common/const');
 

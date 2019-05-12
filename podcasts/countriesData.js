@@ -1,6 +1,6 @@
 const logger = require("../common/logger");
 const constants = require("../common/const");
-const countries = require("./countries");
+const countries = require("../resources/countries");
 
 function getCountriesStringsArray(countries) {
 

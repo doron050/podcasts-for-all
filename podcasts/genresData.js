@@ -1,6 +1,6 @@
 const logger = require("../common/logger");
 const constants = require("../common/const");
-const genres = require("./genres");
+const genres = require("../resources/genres");
 
 // Translate genre ids to to names
 function getGenresStringsFromArray(ids){
