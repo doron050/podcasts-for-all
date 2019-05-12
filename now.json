@@ -7,6 +7,10 @@
     }],
     "routes": [
         {
+            "src": "/1",
+            "dest": "resources/images/addon_logo.png"
+        },
+        {
             "src": "/(.*)",
             "dest": "server.js"
         }
