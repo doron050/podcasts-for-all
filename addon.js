@@ -1,24 +1,17 @@
 // External dependencies
-const {
-	addonBuilder
-} = require("stremio-addon-sdk");
-
-const axios = require('axios');
-const date_time = require('date-time');
+const { addonBuilder } = require("stremio-addon-sdk");
 
 // Dependencie which read from the env variables
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
 // Internal dependencies
 const constants = require('./common/const');
 const logger = require("./common/logger.js");
 const convertors = require("./podcasts/convertors");
 const podcastsData = require("./podcasts/podcastsData");
-const genres = require("./podcasts/genres");
-const countries = require("./podcasts/countries");
 const genresData = require("./podcasts/genresData");
 const countriesData = require("./podcasts/countriesData");
+const manifest = require('./manifest');
 
 logger.info(constants.LOG_MESSAGES.START_ADDON + " Version: " + process.env.VERSION);
 
@@ -27,60 +20,9 @@ let usibilityCounters = {
 	catalogRequests: 0,
 	metaRequests: 0,
 	streamRequests: 0
-}
-
-// Init genrs objectk
-genres.genresById = genresData.createPodcastGenresById(genres.genres);
-
-// Define the addon
-// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
-const manifest = {
-	id: "community.StremioPodcust",
-	version: process.env.VERSION,
-	catalogs: [{
-			type: constants.CATALOGS.TYPE,
-			id: constants.CATALOGS.BY_GENRE.ID,
-			name: constants.CATALOGS.BY_GENRE.NAME,
-			genres: genresData.getGenresIdsFromArray(genres.genres),
-			extraSupported: ['genre', 'search', 'skip']
-		},
-		{
-			type: constants.CATALOGS.TYPE,
-			id: constants.CATALOGS.BY_COUNTRY.ID,
-			name: constants.CATALOGS.BY_COUNTRY.NAME,
-			genres: countriesData.getCountriesStringsArray(countries),
-			extraSupported: ['genre', 'search', 'skip']
-		},
-		{
-			type: constants.CATALOGS.TYPE,
-			id: constants.CATALOGS.FEELING_LUCKY.ID,
-			name: constants.CATALOGS.FEELING_LUCKY.NAME,
-			genres: constants.CATALOGS.FEELING_LUCKY.GENRES,
-			extraSupported: ['genre', 'search', 'skip']
-		}
-	],
-	resources: [
-		"catalog",
-		{
-			name: 'stream',
-			types: ['series'],
-			idPrefixes: [constants.ID_PREFIX]
-		},
-		{
-			name: 'meta',
-			types: ['series'],
-			idPrefixes: [constants.ID_PREFIX]
-		}
-	],
-	types: [
-		"series"
-	],
-	name: "Podcasts For All",
-	contactEmail: constants.CONTACT_EMAIL,
-	logo: constants.ADDON_LOGO,
-	background: constants.ADDON_BACKGROUND,
-	description: "Stream the best and most verstile HQ Podcasts- It will be a great listening experience! (Powered by LISTEN NOTES)"
 };
+
+
 const builder = new addonBuilder(manifest);
 
 // Addon handlers
