@@ -109,4 +109,12 @@ builder.defineStreamHandler(async ({
 	};
 });
 
+// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineSubtitlesHandler.md
+builder.defineSubtitlesHandler(async function (args) {
+
+	return {
+		subtitles: []
+	};
+});
+
 module.exports = builder.getInterface();

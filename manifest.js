@@ -42,6 +42,11 @@ module.exports = {
             name: 'meta',
             types: ['series'],
             idPrefixes: [constants.ID_PREFIX]
+        },
+        {
+            name: 'subtitles',
+            types: ['series'],
+            idPrefixes: [constants.ID_PREFIX]
         }
     ],
     types: [
