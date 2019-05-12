@@ -62,8 +62,11 @@
 
 ## How to Use
 * Open your Stremio client :computer::iphone:
-* Go to `addons` (usually it's up there :arrow_upper_right:)
-* Copy our addon url <http://podcasts-for-all.ga> and paste it on `Add-On Repository Url`
+* Install the addon:
+  * Go to `addons` (usually it's up there :arrow_upper_right:), search for this addon and click `Install`
+  * Or choose one of the alternatives:
+    * Copy our addon url <https://podcasts-for-all.ga/manifest.json> and paste it on `Add-On Repository Url`
+    * Browse to our addon  [install page](https://podcasts-for-all.ga) and click `Install Add-on`
 * Now go back :arrow_backward: and then go to `Discover` :telescope:
 * Our top podcasts are under the `Podcasts` catalog
 * You can now filter your podcasts by `Genre` or `Country` (Each one represented as sub-catalog) :performing_arts:
