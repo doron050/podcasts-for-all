@@ -8,7 +8,7 @@ function episodeToVideo(episode, episodeNumber) {
 
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id);
 
-    let video = {
+    return {
         id: constants.ID_PREFIX + episode.id,
         title: episode.title,
         released: (new Date(episode.pub_date_ms)).toISOString(),
@@ -21,24 +21,19 @@ function episodeToVideo(episode, episodeNumber) {
         season: 1,
         //trailer: trailer,
         overview: episode.description
-    }
-
-    return (video);
+    };
 }
 
 function episodesToVideos(episodes) {
-
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_EPISODES_TO_VIDEOS + episodes.length);
 
     let videos = {
         asArray: [],
         asObjectById: {}
     };
-
     let episodeNumber = 1;
 
     episodes.forEach(episode => {
-
         let currentVideo = episodeToVideo(episode, episodeNumber);
 
         episodeNumber++;
@@ -47,11 +42,10 @@ function episodesToVideos(episodes) {
         videos.asObjectById[episode.id] = currentVideo;
     });
 
-    return (videos);
+    return videos;
 }
 
 async function podcastToSeries(podcast) {
-
     logger.trace(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
 
     let released = "";
@@ -81,7 +75,7 @@ async function podcastToSeries(podcast) {
         country: podcast.country,
         awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
         website: podcast.website
-    }
+    };
 
     if (podcast.earliest_pub_date_ms || podcast.latest_pub_date_ms) {
         series.releaseInfo = generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms)
@@ -89,10 +83,10 @@ async function podcastToSeries(podcast) {
 
     // Sets series parameters if there is episodes to the podcast
     if (podcast.episodes) {
-        const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
         series.runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " min     | ";
         series.genres = genresData.getGenresStringsFromArray(podcast.genre_ids);
 
+        const allEpisodes = await podcastsData.getAllEpisodesForPodcast(podcast);
         let episodesAsVideos = episodesToVideos(allEpisodes);
         series.videos = episodesAsVideos.asArray;
 
@@ -103,7 +97,7 @@ async function podcastToSeries(podcast) {
     return series;
 }
 
-async function podcastsToSerieses(podcasts, simpleGenre) {
+async function podcastsToSerieses(podcasts) {
     let serieses = {
         asArray: [],
         asObjectById: {}
@@ -120,7 +114,6 @@ async function podcastsToSerieses(podcasts, simpleGenre) {
 }
 
 function generateAwards(explicit_content, is_claimed) {
-
     let awards = "Explicit Content: X | ";
 
     if (explicit_content) {
@@ -139,7 +132,6 @@ function generateAwards(explicit_content, is_claimed) {
 }
 
 function generateBasicGenres(podcast) {
-
     let language = "<b>Country: </b>";
     let country = "<b>Language: </b>";
     let nextEpisode = "<b>Next Episode: </b>";
@@ -153,25 +145,22 @@ function generateBasicGenres(podcast) {
     if (podcast.nextEpisode) basicGenres.push(nextEpisode += new Date(podcast.next_episode_pub_date).toDateString());
     if (podcast.explicit_content) basicGenres.push("<b><var>* Notice! Explicit Contact</var></b>")
 
-    return (basicGenres);
+    return basicGenres;
 }
 
 function generateReleaseInfo(oldestEpisodeTime, newestEpisodeTime) {
-
     let oldestEpisodeYear = (new Date(oldestEpisodeTime)).getFullYear();
     let newestEpisosdeYear = (new Date(newestEpisodeTime)).getFullYear();
     let releaseInfo = oldestEpisodeYear + "-" + newestEpisosdeYear;
-    if (oldestEpisodeYear == newestEpisosdeYear) {
+    if (oldestEpisodeYear === newestEpisosdeYear) {
 
         releaseInfo = oldestEpisodeYear;
     }
 
-
-    return (releaseInfo);
+    return releaseInfo;
 }
 
 function podcastToSeriesVideo(podcast) {
-
     let series = {
         id: podcast.id,
         title: podcast.title,
@@ -183,13 +172,13 @@ function podcastToSeriesVideo(podcast) {
         overview: podcast.description
     };
 
-    if (podcast.earliest_pub_date_ms) series.released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
+    if (podcast.earliest_pub_date_ms)
+        series.released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
 
-    return (series)
+    return series;
 }
 
 function getStreamsFromEpisode(episode) {
-
     let streams = [{
             url: episode.audio,
             title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
@@ -235,11 +224,11 @@ function getStreamsFromEpisode(episode) {
         title: constants.API_CONSTANTS.STREAMS_TITLES.INSTAGRAM_STREAM_TITLE
     });
 
-    return (streams);
+    return streams;
 }
 
 function luckyPodcastToPodcast(luckyPodcast) {
-    var podcast = {
+    return {
         id: luckyPodcast.podcast_id,
         title: luckyPodcast.podcast_title,
         publisher: luckyPodcast.publisher,
@@ -248,9 +237,7 @@ function luckyPodcastToPodcast(luckyPodcast) {
         image: luckyPodcast.image,
         listennotes_url: luckyPodcast.listennotes_url,
         description: "Lucky people go all the way in!"
-    }
-
-    return podcast;
+    };
 }
 
 module.exports = {
