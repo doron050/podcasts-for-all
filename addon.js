@@ -32,7 +32,6 @@ builder.defineCatalogHandler(async ({
 	id,
 	extra
 }) => {
-
 	usibilityCounters.catalogRequests++;
 
 	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ") Catalog Counter: " + usibilityCounters.catalogRequests);
@@ -44,19 +43,18 @@ builder.defineCatalogHandler(async ({
 		genre = extra.genre;
 		genre = genresData.findGenreId(genre)
 	}
+
 	else if (extra.genre && id === constants.CATALOGS.BY_COUNTRY.ID){
 		country = extra.genre;
 		country = countriesData.findCountryId(country);
 	}
-	else if (extra.genre && id === constants.CATALOGS.FEELING_LUCKY.ID){
-		return (podcastsData.getFeelingLucky()).then(function(podcast){
-			return (convertors.podcastsToSerieses([convertors.luckyPodcastToPodcast(podcast)]).then(function(serieses){
 
-				return {
-					metas: serieses.asArray
-				};
-			}))
-		});
+	else if (extra.genre && id === constants.CATALOGS.FEELING_LUCKY.ID){
+		const podcast = await podcastsData.getFeelingLucky();
+		const serieses = await convertors.podcastsToSerieses([convertors.luckyPodcastToPodcast(podcast)]);
+		return {
+			metas: serieses.asArray
+		};
 	}
 
 	// If there is active search using search api instead of best podcasts api
@@ -68,7 +66,9 @@ builder.defineCatalogHandler(async ({
 		return {
 			metas: Serieses.asArray
 		};
-	} else {
+	}
+
+	else {
 		const podcasts = await podcastsData.getBestPodcasts(extra.skip ? extra.skip : 0, genre, country);
 		const serieses = await convertors.podcastsToSerieses(podcasts);
 		let finalPodcasts = serieses.asArray;
@@ -91,29 +91,27 @@ builder.defineMetaHandler(async ({
 
 	//currentPoducastId = id;
 	const podcast = await podcastsData.getPodcastById(id);
-	return ({
+	return {
 		meta: await convertors.podcastToSeries(podcast),
 		video: convertors.podcastToSeriesVideo(podcast)
-	});
+	};
 });
 
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
-builder.defineStreamHandler(({
+builder.defineStreamHandler(async ({
 	id,
 	type
 }) => {
 
 	usibilityCounters.streamRequests++;
-
 	logger.trace(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests);
+
 	id = id.replace(constants.ID_PREFIX, "");
 
-	return (podcastsData.getEpisodeById(id).then(function (episode) {
-
-		return ({
-			streams: convertors.getStreamsFromEpisode(episode)
-		})
-	}));
+	const episode = await podcastsData.getEpisodeById(id);
+	return {
+		streams: convertors.getStreamsFromEpisode(episode)
+	};
 });
 
 module.exports = builder.getInterface();
