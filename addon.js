@@ -1,5 +1,7 @@
 // External dependencies
-const { addonBuilder } = require("stremio-addon-sdk");
+const {
+	addonBuilder
+} = require("stremio-addon-sdk");
 
 // Dependencie which read from the env variables
 require('dotenv').config();
@@ -41,14 +43,10 @@ builder.defineCatalogHandler(async ({
 	if (extra.genre && id === constants.CATALOGS.BY_GENRE.ID) {
 		genre = extra.genre;
 		genre = genresData.findGenreId(genre)
-	}
-
-	else if (extra.genre && id === constants.CATALOGS.BY_COUNTRY.ID){
+	} else if (extra.genre && id === constants.CATALOGS.BY_COUNTRY.ID) {
 		country = extra.genre;
 		country = countriesData.findCountryId(country);
-	}
-
-	else if (extra.genre && id === constants.CATALOGS.FEELING_LUCKY.ID){
+	} else if (extra.genre && id === constants.CATALOGS.FEELING_LUCKY.ID) {
 		const podcast = await podcastsData.getFeelingLucky();
 		const serieses = await convertors.podcastsToSerieses([convertors.luckyPodcastToPodcast(podcast)]);
 		return {
@@ -65,9 +63,7 @@ builder.defineCatalogHandler(async ({
 		return {
 			metas: Serieses.asArray
 		};
-	}
-
-	else {
+	} else {
 		const podcasts = await podcastsData.getBestPodcasts(extra.skip ? extra.skip : 0, genre, country);
 		const serieses = await convertors.podcastsToSerieses(podcasts);
 		let finalPodcasts = serieses.asArray;

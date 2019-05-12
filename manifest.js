@@ -10,12 +10,12 @@ module.exports = {
     id: "community.StremioPodcust",
     version: process.env.VERSION,
     catalogs: [{
-        type: constants.CATALOGS.TYPE,
-        id: constants.CATALOGS.BY_GENRE.ID,
-        name: constants.CATALOGS.BY_GENRE.NAME,
-        genres: genresData.getGenresIdsFromArray(genres.genres),
-        extraSupported: ['genre', 'search', 'skip']
-    },
+            type: constants.CATALOGS.TYPE,
+            id: constants.CATALOGS.BY_GENRE.ID,
+            name: constants.CATALOGS.BY_GENRE.NAME,
+            genres: genresData.getGenresIdsFromArray(genres.genres),
+            extraSupported: ['genre', 'search', 'skip']
+        },
         {
             type: constants.CATALOGS.TYPE,
             id: constants.CATALOGS.BY_COUNTRY.ID,

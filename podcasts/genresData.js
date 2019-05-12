@@ -4,17 +4,16 @@ const genres = require("../resources/genres");
 
 // Translate genre ids to to names
 function getGenresStringsFromArray(ids) {
-     let genresStrings = [];
-     let genresById = createPodcastGenresById(genres.genres);
-     if (Array.isArray(ids)) {
-        ids.forEach(function(id) {
+    let genresStrings = [];
+    let genresById = createPodcastGenresById(genres.genres);
+    if (Array.isArray(ids)) {
+        ids.forEach(function (id) {
             genresStrings.push(genresById[id].name.replace(" & ", " and "));
         });
-    }
-    else {
+    } else {
         genresStrings.push(genresById[id].name.replace(" & ", " and "));
     }
-     
+
     logger.trace(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
     return genresStrings.sort();
 }
@@ -22,7 +21,7 @@ function getGenresStringsFromArray(ids) {
 // Translate genre names to to ids
 function getGenresIdsFromArray(genres) {
     let genresIds = [];
-    genres.forEach(function(genre){
+    genres.forEach(function (genre) {
         genresIds.push(genre.id);
     });
 
@@ -33,7 +32,7 @@ function getGenresIdsFromArray(genres) {
 // Use only once for creating a genres object by id
 function createPodcastGenresById(genres) {
     let genresById = {};
-    genres.forEach(function(genre) {
+    genres.forEach(function (genre) {
         genresById[genre.id] = genre;
     });
 
@@ -55,7 +54,7 @@ function findGenreId(genreName) {
         }
 
         genreCount++;
-    }   
+    }
 
     return genreId;
 }
