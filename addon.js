@@ -22,7 +22,6 @@ let usibilityCounters = {
 	streamRequests: 0
 };
 
-
 const builder = new addonBuilder(manifest);
 
 // Addon handlers
