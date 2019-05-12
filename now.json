@@ -4,12 +4,12 @@
     "builds": [{
         "src": "server.js",
         "use": "@now/node-server"
+    },
+    {
+        "src": "resources",
+        "use": "@now/static"
     }],
     "routes": [
-        {
-            "src": "/1",
-            "dest": "resources/images/addon_logo.png"
-        },
         {
             "src": "/(.*)",
             "dest": "server.js"
