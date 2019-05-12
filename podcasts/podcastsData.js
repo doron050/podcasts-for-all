@@ -1,5 +1,5 @@
-const logger = require("../useful/logger");
-const constants = require("../useful/const");
+const logger = require("../common/logger");
+const constants = require("../common/const");
 
 async function getBestPodcasts(skip, genreId, region) {
 

@@ -1,5 +1,5 @@
-const logger = require("../useful/logger");
-const constants = require("../useful/const");
+const logger = require("../common/logger");
+const constants = require("../common/const");
 const podcastsData = require("./podcastsData");
 const genresData = require("./genresData");
 

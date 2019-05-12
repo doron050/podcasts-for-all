@@ -34,9 +34,9 @@ const LOG_MESSAGES = {
     ON_GOING_HANDLE_WITH_PROMISES: "Not all promises 'getPodcastById' completed yet. More to go: ",
     END_HANDLE_WITH_PROMISES: "All promises handled: ",
     INIT_GENRES_BY_ID_OBJECT: "Done! Create genres object. Num of genres: "
-}
+};
 
-const PODCASTS_DATA_BASE_API_URL = "https://listen-api.listennotes.com"
+const PODCASTS_DATA_BASE_API_URL = "https://listen-api.listennotes.com";
 
 const PODCASTS_DATA_API_ROUTES = {
     SEARCH: "/api/v2/search",
@@ -45,12 +45,12 @@ const PODCASTS_DATA_API_ROUTES = {
     BEST_PODCASTS: "/api/v2/best_podcasts",
     GENRES: "/api/v2/genres",
     FEELING_LUCKY: "/api/v2/just_listen"
-}
+};
 
 const PODCASTS_API_KEY = {
     HEADER_NAME: 'X-ListenAPI-Key',
     KEY: process.env.PODCASTS_API_KEY
-}
+};
 
 // Podcast api docs https://www.listennotes.com/api/docs/
 const apiInstance = axios.create({
@@ -82,7 +82,7 @@ const CATALOGS = {
         NAME: "Feeling Lucky!",
         GENRES: ["Good luck!"]
     }
-}
+};
 
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
@@ -121,7 +121,7 @@ const API_CONSTANTS = {
     FACEBOOK_BASE_URL: "https://www.facebook.com/",
     TWEETER_BASE_URL: "https://www.tweeter.com/",
     INSTAGRAM_BAE_URL: "https://www.instagram.com/"
-}
+};
 
 module.exports = {
     CATALOGS,
@@ -136,4 +136,4 @@ module.exports = {
     CONTACT_EMAIL,
     ADDON_LOGO,
     ADDON_BACKGROUND
-}
+};

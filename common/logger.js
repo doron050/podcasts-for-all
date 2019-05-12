@@ -1,5 +1,4 @@
 const log4js = require('log4js');
-const constants = require('./const');
 
 log4js.configure({
     appenders: {
@@ -15,6 +14,4 @@ log4js.configure({
     }
 });
 
-var logger = log4js.getLogger("default");
-
-module.exports = logger;
+module.exports = log4js.getLogger("default");
