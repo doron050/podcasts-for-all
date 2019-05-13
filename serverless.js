@@ -5,7 +5,7 @@ const router = getRouter(addonInterface);
 
 // landing page
 const landingHTML = landingTemplate(addonInterface.manifest);
-app.get('/', (_, res) => {
+router.get('/', (_, res) => {
     res.setHeader('content-type', 'text/html');
     res.end(landingHTML);
 });
