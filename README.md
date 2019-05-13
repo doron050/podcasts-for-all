@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png" alt="Podcast For All" width="150"></a>
+  <img src="https://github.com/NivM1/StremioPodcust/blob/master/static/addon_logo.png" alt="Podcast For All" width="150"></a>
   <br>
   Podcasts For All
   <br>
@@ -17,8 +17,8 @@
   • <a href="#Our-Vision">Our Vision</a> 
   • <a href="#Key-Features">Key Features</a>
   • <a href="#How-to-Use">How to Use</a>
-   • <a href="#Support-and-Contact">Contact</a>
-  • <a href="#Setup-for-Development">Setup for Dev</a>
+  • <a href="#Setup-for-Development">Dev Setup</a>
+  • <a href="#Support-and-Contact">Contact</a>
   • <a href="https://www.stremio.com/competition">Add-On Master</a>
   • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
   
@@ -55,10 +55,10 @@
 * Powered by LISTEN NOTES API
 
 #### Screenshot - Main Podcasts Catalog:
-![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
+![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/static/podcast_for_all_screen.jpg)
 
 #### Screenshot - Select Episode:
-![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
+![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/static/podcast_for_all_screen2.jpg)
 
 ## How to Use
 * Open your Stremio client :computer::iphone:
@@ -111,6 +111,10 @@ $ npm install
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
+### Our Team 
+
+![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/master/static/team.jpg)
+            
 ### Support and Contact
 ------
 
@@ -118,7 +122,7 @@ $ npm install
 Authored and maintained by DE, NM. with help from contributors.
 
 
-> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [@Niv](https://github.com/nivm1) <br/>
 > GitHub [@Doron Eli](https://github.com/doron050) <br/>
 > Contact us via mail: <podcasts_for_all@yahoo.com>
 
