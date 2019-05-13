@@ -1,12 +1,10 @@
 {
   "version": 2,
   "builds": [
-    { "src": "serverless.js", "use": "@now/node" },
-    { "src":  "index.html", "use":  "@now/static" }
+    { "src": "serverless.js", "use": "@now/node" }
   ],
   "routes": [
-    { "src": "/stremio/*", "dest": "/serverless.js" },
-    { "src": "/index", "dest": "/index.html" }
+    { "src": "/.*", "dest": "/serverless.js" }
   ],
   "env": {
     "VERSION": "@version",
