@@ -37,7 +37,7 @@
 
 ## Our Team 
 
-![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/static/team.jpg)
+![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/master/static/team.jpg)
             
 ## Key Features
 
