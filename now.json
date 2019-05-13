@@ -2,9 +2,19 @@
   "version": 2,
   "builds": [
     { "src": "serverless.js", "use": "@now/node" },
-    { "src":  "index.html", "use":  "@now/static"}
+    { "src":  "index.html", "use":  "@now/static" }
   ],
   "routes": [
-    { "src": "/.*", "dest": "/serverless.js" }
-  ]
+    { "src": "/stremio/*", "dest": "/serverless.js" },
+    { "src": "/index", "dest": "/index.html" }
+  ],
+  "env": {
+    "VERSION": "@version",
+    "LOG_LEVEL": "@log_level",
+    "PODCASTS_API_KEY": "@podcasts_api_key"
+  },
+  "github": {
+    "silent": true
+  },
+  "alias": ["podcasts-for-all.ga"]
 }
