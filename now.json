@@ -5,7 +5,7 @@
     { "src":  "index.html", "use":  "@now/static" }
   ],
   "routes": [
-    { "src": "/*", "dest": "/serverless.js" },
+    { "src": "/.*", "dest": "/serverless.js" },
     { "src": "/index", "dest": "/index.html" }
   ],
   "env": {
