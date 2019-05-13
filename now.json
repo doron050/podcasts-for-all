@@ -1,25 +1,18 @@
 {
-    "name": "Podcasts-for-all",
-    "version": 2,
-    "builds": [{
-        "src": "server.js",
-        "use": "@now/node-server"
-    },
-    { "src": "index.html", "use": "@now/static" }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "server.js"
-        }
-    ],
-    "env": {
-        "VERSION": "@version",
-        "LOG_LEVEL": "@log_level",
-        "PODCASTS_API_KEY": "@podcasts_api_key"
-    },
-    "github": {
-        "silent": true
-    },
-    "alias": ["podcasts-for-all.ga"]
+  "version": 2,
+  "builds": [
+    { "src": "serverless.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "/serverless.js" }
+  ],
+  "env": {
+    "VERSION": "@version",
+    "LOG_LEVEL": "@log_level",
+    "PODCASTS_API_KEY": "@podcasts_api_key"
+  },
+  "github": {
+    "silent": true
+  },
+  "alias": ["podcasts-for-all.ga"]
 }
