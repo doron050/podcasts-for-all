@@ -7,7 +7,7 @@ const countries = require("./resources/countries");
 genres.genresById = genresData.createPodcastGenresById(genres.genres);
 
 module.exports = {
-    id: "community.StremioPodcust",
+    id: "community.podcasts-for-all",
     version: process.env.VERSION,
     catalogs: [{
             type: constants.CATALOGS.TYPE,
