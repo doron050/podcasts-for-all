@@ -107,7 +107,7 @@ $ npm install
 
 * Run your addon local server using `npm start`
 * Install it on your StremIO app (web / desktop) :computer:
-  * The addon will be available here: <http://127.0.0.1:56960/manifest.json>
+  * The addon will be available here: <https://127.0.0.1:56960/manifest.json>
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
