@@ -10,10 +10,10 @@ const landingHTML = landingTemplate(addonInterface.manifest);
 
 router.get('/redirectToAddonInstall', (_, res) => {
 
-    response.writeHead(301, {
+    res.writeHead(301, {
         Location: 'stremio://podcasts-for-all.ga/manifest.json'
     });
-    response.end();
+    res.end();
 });
 
 router.get('/', (_, res) => {
