@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_logo.png" alt="Podcast For All" width="150"></a>
+  <img src="https://github.com/NivM1/StremioPodcust/blob/master/static/addon_logo.png" alt="Podcast For All" width="150"></a>
   <br>
   Podcasts For All
   <br>
@@ -35,6 +35,10 @@
 ## Our Vision
 > Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - Stremio
 
+## Our Team 
+
+![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/static/team.jpg)
+            
 ## Key Features
 
 * Best podcasts worldwide (smart filters and ordering) :trophy:
@@ -55,10 +59,10 @@
 * Powered by LISTEN NOTES API
 
 #### Screenshot - Main Podcasts Catalog:
-![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen.jpg)
+![Podcasts Catalog](https://github.com/NivM1/podcasts-for-all/blob/master/static/podcast_for_all_screen.jpg)
 
 #### Screenshot - Select Episode:
-![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/resources/images/podcast_for_all_screen2.jpg)
+![Podcasts Epidsodes](https://github.com/NivM1/podcasts-for-all/blob/master/static/podcast_for_all_screen2.jpg)
 
 ## How to Use
 * Open your Stremio client :computer::iphone:
@@ -118,7 +122,7 @@ $ npm install
 Authored and maintained by DE, NM. with help from contributors.
 
 
-> GitHub [@Niv M](https://github.com/nivm1) <br/>
+> GitHub [@Niv](https://github.com/nivm1) <br/>
 > GitHub [@Doron Eli](https://github.com/doron050) <br/>
 > Contact us via mail: <podcasts_for_all@yahoo.com>
 
