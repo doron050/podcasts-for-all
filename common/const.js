@@ -119,8 +119,8 @@ const API_CONSTANTS = {
         INSTAGRAM_STREAM_TITLE: "Instagram"
     },
     FACEBOOK_BASE_URL: "https://www.facebook.com/",
-    TWEETER_BASE_URL: "https://www.tweeter.com/",
-    INSTAGRAM_BAE_URL: "https://www.instagram.com/"
+    TWITTER_BASE_URL: "https://www.twitter.com/",
+    INSTAGRAM_BASE_URL: "https://www.instagram.com/"
 };
 
 module.exports = {
