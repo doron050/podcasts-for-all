@@ -17,8 +17,9 @@
   • <a href="#Our-Vision">Our Vision</a> 
   • <a href="#Key-Features">Key Features</a>
   • <a href="#How-to-Use">How to Use</a>
-   • <a href="#Support-and-Contact">Contact</a>
   • <a href="#Setup-for-Development">Setup for Dev</a>
+  • <a href="#Our-Team">Team</a>
+  • <a href="#Support-and-Contact">Contact</a>
   • <a href="https://www.stremio.com/competition">Add-On Master</a>
   • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
   
@@ -35,10 +36,6 @@
 ## Our Vision
 > Deliver the **_best listening experience_** to the **_most verstile & high-quality_** podcasts<br/>right to your daily use media platform - Stremio
 
-## Our Team 
-
-![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/master/static/team.jpg)
-            
 ## Key Features
 
 * Best podcasts worldwide (smart filters and ordering) :trophy:
@@ -115,6 +112,10 @@ $ npm install
 * Now go to <https://staging.strem.io/#/discover/Podcasts> and **enjoy your contribution to this great addon!** :trumpet:
 
 
+### Our Team 
+
+![Podcasts For All Team](https://github.com/NivM1/podcasts-for-all/blob/master/static/team.jpg)
+            
 ### Support and Contact
 ------
 
