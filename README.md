@@ -18,7 +18,6 @@
   • <a href="#Key-Features">Key Features</a>
   • <a href="#How-to-Use">How to Use</a>
   • <a href="#Setup-for-Development">Setup for Dev</a>
-  • <a href="#Our-Team">Team</a>
   • <a href="#Support-and-Contact">Contact</a>
   • <a href="https://www.stremio.com/competition">Add-On Master</a>
   • <a href="https://www.stremio.com/addon-sdk">Stremio add-on SDK</a>
