@@ -53,8 +53,9 @@ module.exports = {
         "series"
     ],
     name: "Podcasts For All",
+    email: constants.CONTACT_EMAIL,
     contactEmail: constants.CONTACT_EMAIL,
     logo: constants.ADDON_LOGO,
     background: constants.ADDON_BACKGROUND,
-    description: "Stream the best and most verstile HQ Podcasts- It will be a great listening experience! (Powered by LISTEN NOTES)"
+    description: "Stream the best and most verstile HQ Podcasts- It will be a great listening experience! Over 666,000 Podcasts and 44,000,000 Episodes, All genres & languages (Powered by LISTEN NOTES)"
 };
