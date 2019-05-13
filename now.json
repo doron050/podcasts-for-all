@@ -4,14 +4,7 @@
     "builds": [{
         "src": "server.js",
         "use": "@now/node-server"
-    }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "server.js"
-        }
-    ],
+    }],
     "env": {
         "VERSION": "@version",
         "LOG_LEVEL": "@log_level",
