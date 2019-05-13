@@ -64,8 +64,8 @@ const apiInstance = axios.create({
 const ID_PREFIX = "ap";
 
 const CONTACT_EMAIL = "podcasts_for_all@yahoo.com";
-const ADDON_LOGO = "http://www.liberaldictionary.com/wp-content/uploads/2019/02/icon-0326.jpg";
-const ADDON_BACKGROUND = "https://github.com/NivM1/StremioPodcust/blob/master/resources/images/addon_background.jpg?raw=true";
+const ADDON_LOGO = "https://github.com/NivM1/podcasts-for-all/blob/master/static/addon_logo.png?raw=true";
+const ADDON_BACKGROUND = "https://github.com/NivM1/podcasts-for-all/blob/master/static/addon_background.jpg?raw=true";
 
 const CATALOGS = {
     TYPE: "Podcasts",
