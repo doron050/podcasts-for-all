@@ -16,6 +16,6 @@
     "github": {
         "silent": true
     },
-    "scope": "podcasts-for-all",
+    "scope": "podcast-for-all-stremio",
     "alias": ["podcasts-for-all.ga"]
 }
