@@ -4,10 +4,6 @@
     { "src": "serverless.js", "use": "@now/node" },
     { "src":  "index.html", "use":  "@now/static" }
   ],
-  "routes": [
-    { "src": "/stremio/*", "dest": "/serverless.js" },
-    { "src": "/index", "dest": "/index.html" }
-  ],
   "env": {
     "VERSION": "@version",
     "LOG_LEVEL": "@log_level",
