@@ -127,7 +127,7 @@ function landingTemplate(manifest) {
             <li>More Podcasts than you can imagine</li>
             <li>All Podcast Episodes</li>
             <li>Social and podcast website refrences</li>
-            <li>Veries catalogs and search</li>
+            <li>Various catalogs and search</li>
 			</ul>
 
 			<a id="installLink" class="install-link" href="#">
