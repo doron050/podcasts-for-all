@@ -17,24 +17,29 @@ async function getBestPodcasts(skip, genreId, region) {
     let canKeepPulling = true;
     let internalPage = skip / podcastPerRequest + 1;
 
-    do {
-        const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.BEST_PODCASTS, {
-            params: {
-                page: internalPage,
-                genre_id: genre,
-                region: regionFilter
-            }
-        });
+    try {
+        do {
+            const result = await constants.apiInstance.get(constants.PODCASTS_DATA_API_ROUTES.BEST_PODCASTS, {
+                params: {
+                    page: internalPage,
+                    genre_id: genre,
+                    region: regionFilter
+                }
+            });
 
-        podcasts.push(...result.data.podcasts);
-        canKeepPulling = result.data.has_next;
-        internalPage++;
+            podcasts.push(...result.data.podcasts);
+            canKeepPulling = result.data.has_next;
+            internalPage++;
 
-    } while (podcasts.length < 40 && canKeepPulling);
+        } while (podcasts.length < 40 && canKeepPulling);
 
-    logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
-    return podcasts;
+        logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_BEST_PODCASTS + podcasts.length);
+        return podcasts;
+    } catch (e) {
+        logListenNoteErrors('getting best podcasts', e);
+    }
 }
+
 
 async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
     logger.trace(constants.LOG_MESSAGES.START_SEARCH_PODCASTS + searchTerm);
@@ -60,6 +65,7 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
         return result.data.results;
     } catch (e) {
         logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + e);
+        logListenNoteErrors('searching podcasts', e);
     }
 }
 
@@ -75,6 +81,7 @@ async function getPodcastById(id, params = {}) {
         return response.data;
     } catch (e) {
         logger.error(constants.LOG_MESSAGES.ERROR_GET_PODCAST_BY_ID + e);
+        logListenNoteErrors('getting detail podcast', e);
     }
 }
 
@@ -87,6 +94,7 @@ async function getEpisodeById(id) {
         logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_EPISODE_BY_ID + response.data.id);
         return response.data;
     } catch (e) {
+        logListenNoteErrors('getting episode by id', e);
         logger.error(constants.LOG_MESSAGES.ERROR_GET_EPISODE_BY_ID + e);
     }
 }
@@ -118,7 +126,22 @@ async function getFeelingLucky() {
         logger.trace(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id);
         return response.data;
     } catch (e) {
+        logListenNoteErrors('getting feeling lucky podcast', e);
         logger.error(constants.LOG_MESSAGES.ERROR_FEELING_LUCKY + e);
+    }
+}
+
+function logListenNoteErrors(operation, e) {
+    if (e.responce.status === 401) {
+        logger.error('on ' + operation + ' we got error code 401 - wrong api key or your account is suspended.\n exception detail:' + e);
+    } else if (e.responce.status === 404) {
+        logger.error('on ' + operation + ' we got error code 404 endpoint not exist, or podcast / episode not exist.\n exception detail:' + e);
+    } else if (e.responce.status === 429) {
+        logger.error('on ' + operation + ' we got error code 429 you are using FREE plan and you exceed the quota limit.\n exception detail:' + e);
+    } else if (e.responce.status === 500) {
+        logger.error('on ' + operation + ' we got error code 500 something wrong on listennote end.\n exception detail:' + e);
+    } else {
+        logger.error(constants.LOG_MESSAGES.ERROR_SEARCH_PODCASTS + e);
     }
 }
 
