@@ -124,7 +124,10 @@ function landingTemplate(manifest) {
 
 			<h2 class="gives">This add-on has:</h2>
 			<ul>
-				<li>More ${stylizedTypes}</li>
+            <li>More Podcasts than you can imagine</li>
+            <li>All Podcast Episodes</li>
+            <li>Social and podcast website refrences</li>
+            <li>Veries catalogs and search</li>
 			</ul>
 
 			<a id="installLink" class="install-link" href="#">
