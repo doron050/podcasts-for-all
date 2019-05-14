@@ -101,7 +101,7 @@ button:hover {
 function landingTemplate(manifest) {
    const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
    const logo = manifest.logo || 'https://dl.strem.io/addon-logo.png'
-   const apiLogo = 'https://uc08734ff59018c5c1ebf88e4483.previews.dropboxusercontent.com/p/thumb/AAaoZK79negQSwuYWN76WiMNnNS0t31hmTR1pvnTcR4cjVSzhJBfgfFcDEiOXVmCKcM8pqcZ7uPK2h1DToMF756AMC6qW7prFqXFu5vc0iDIqwe1hrDkvbb44GwKOZZGBBGiuBLJagstURQ_wyh5k7IZDl6EIDfahyoCryaQQSwtVwnnhsHhiE_zbKYL6XcsviN5_G6uk5eFeEl0SdxhlvgI5BN-A5hOjr6PpvjFDpNEobaTaitE-V_zPF8CoUfRRlk_ZKCkIpQR8OiMnrohAICT6a2ERWSIZVMmLDL49FWBnCYzSS6P2MD5FCAoNf8c0GfUQoyyp4Lx_RvRcaLviZXqtaCfoGki1SZZCLzt3_oJG69HzjNyZR6lTdb3_qD6SGc/p.png?fv_content=true&size_mode=5';
+   const apiLogo = 'https://uc81fb9516a81fb32006bba9aacf.previews.dropboxusercontent.com/p/thumb/AAZ2F-nE9fa0SVSKcNPJMre9MejwrXNkZUY9xQ5MRxWirkNDWQ1L_GyYqTToCsMlC250BlvwirmrOzIoix-L4lCJQZ_eJ5mpJai79V7G-LL9OofoO8ikKpqS-yz2uGlaX-Ui5om4Lgkxz63UCmLtmTFZb4WMxomYSrChA6VtHEoMnUo6dwGbBWBbIJoYTtwes9-ebbeaWMkLbFrfq4zrMG9BF-mn7Mkw5R5VfzSXztDr1OxxNGI9iKfCRzW3aF7ikfC0eylWwWJctOeXECdpbatW7yz4t0di6tOjU-yyqxuT5Y3dEM4p3dopDfdbFJ68SLEaqE57cJ2nQgpGeHD_pt8aNPngvIHOR0rKZUIvPR2TB0dDDiIDRURs2W3BdCXeevQ/p.png?fv_content=true&size_mode=5';
    const contactHTML = manifest.contactEmail ?
       `<h3 class="contact">
 		    To contact add-on creator:
