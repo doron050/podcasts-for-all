@@ -15,7 +15,7 @@ router.get('/redirectToAddonInstall', (_, res) => {
     });
     res.end();
 });
-
+ 
 router.get('/', (_, res) => {
     res.setHeader('content-type', 'text/html');
     res.end(landingHTML);
