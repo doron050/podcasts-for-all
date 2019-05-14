@@ -93,8 +93,6 @@ button:hover {
    position: absolute;
    left: 0px;
    bottom: 0px;
-   width: 100px;
-   height: 40px;
 }`
 
 
