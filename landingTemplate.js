@@ -88,23 +88,31 @@ button:hover {
 .best img {
    width: 60px
 }
-`
+
+#listen{
+   position: absolute;
+   left: 0px;
+   bottom: 0px;
+   width: 80px;
+   height: 20px;
+}`
 
 
 function landingTemplate(manifest) {
-    const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
-    const logo = manifest.logo || 'https://dl.strem.io/addon-logo.png'
-    const contactHTML = manifest.contactEmail ?
-        `<h3 class="contact">
+   const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
+   const logo = manifest.logo || 'https://dl.strem.io/addon-logo.png'
+   const apiLogo = 'https://uc08734ff59018c5c1ebf88e4483.previews.dropboxusercontent.com/p/thumb/AAaoZK79negQSwuYWN76WiMNnNS0t31hmTR1pvnTcR4cjVSzhJBfgfFcDEiOXVmCKcM8pqcZ7uPK2h1DToMF756AMC6qW7prFqXFu5vc0iDIqwe1hrDkvbb44GwKOZZGBBGiuBLJagstURQ_wyh5k7IZDl6EIDfahyoCryaQQSwtVwnnhsHhiE_zbKYL6XcsviN5_G6uk5eFeEl0SdxhlvgI5BN-A5hOjr6PpvjFDpNEobaTaitE-V_zPF8CoUfRRlk_ZKCkIpQR8OiMnrohAICT6a2ERWSIZVMmLDL49FWBnCYzSS6P2MD5FCAoNf8c0GfUQoyyp4Lx_RvRcaLviZXqtaCfoGki1SZZCLzt3_oJG69HzjNyZR6lTdb3_qD6SGc/p.png?fv_content=true&size_mode=5';
+   const contactHTML = manifest.contactEmail ?
+      `<h3 class="contact">
 		    To contact add-on creator:
 		    <a href="mailto:${manifest.contactEmail}">${manifest.contactEmail}</a>
 		</h3>` : ''
 
-    const stylizedTypes = manifest.types
-        .map(t => t[0].toUpperCase() + t.slice(1) + (t !=='series' ? 's' : ''))
-        .join(', ')
+   const stylizedTypes = manifest.types
+      .map(t => t[0].toUpperCase() + t.slice(1) + (t !== 'series' ? 's' : ''))
+      .join(', ')
 
-    return `
+   return `
 	<!DOCTYPE html>
 	<html style="background-image: url(${background});">
 
@@ -134,7 +142,8 @@ function landingTemplate(manifest) {
 				<button name="Install">Install Add-on</button>
 			</a>
 			${contactHTML}
-		</div>
+      </div>
+      <img id="listen" src="${apiLogo}"/>
 		<script>
 			installLink.href = 'stremio://' + window.location.host + '/manifest.json'
 		</script>
