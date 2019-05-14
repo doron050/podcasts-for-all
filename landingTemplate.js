@@ -43,7 +43,7 @@ a.install-link {
    text-decoration: none
 }
 
-button {
+button { 
    border: 0px;
    outline: 0px;
    color: white;
