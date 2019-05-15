@@ -1,5 +1,11 @@
-const log4js = require('log4js');
+const logzioLogger = require('logzio-nodejs').createLogger({
+    token: process.env.LOGGER_TOKEN,
+    host: process.env.LOGGER_HOST,
+    supressErrors: process.env.LOGGER_SUPRESS_ERRORS,
+});
 
+
+const log4js = require('log4js');
 log4js.configure({
     appenders: {
         console: {
@@ -13,5 +19,44 @@ log4js.configure({
         }
     }
 });
+const log4jslogger = log4js.getLogger("default");
 
-module.exports = log4js.getLogger("default");
+
+function log(msg) {
+    log4jslogger.log(msg);
+    logzioLogger.log({
+        message: msg,
+        level: 'debug'
+    });
+}
+
+function debugLog(msg) {
+    log4jslogger.debug(msg);
+    logzioLogger.log({
+        message: msg,
+        level: 'debug'
+    });
+}
+
+function infoLog(msg) {
+    log4jslogger.info(msg);
+    logzioLogger.log({
+        message: msg,
+        level: 'info'
+    });
+}
+
+function errorLog(msg) {
+    log4jslogger.info(msg);
+    logzioLogger.log({
+        message: msg,
+        level: 'error'
+    });
+}
+
+module.exports = {
+    log,
+    debug: debugLog,
+    info: infoLog,
+    error: errorLog
+};

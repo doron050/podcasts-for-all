@@ -66,7 +66,7 @@ builder.defineCatalogHandler(async ({
 		if (id === constants.CATALOGS.BY_GENRE.ID){
 	
 			logger.info("Search: " + extra.search);
-			logger.trace(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
+			logger.info(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search);
 
 			const podcasts = await podcastsData.searchPodcasts(extra.search);
 			Serieses = await convertors.podcastsToSerieses(podcasts);
@@ -93,7 +93,7 @@ builder.defineMetaHandler(async ({
 
 	usibilityCounters.metaRequests++;
 
-	logger.trace(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ") Meta Counter: " + usibilityCounters.metaRequests);
+	logger.info(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ") Meta Counter: " + usibilityCounters.metaRequests);
 	id = id.replace(constants.ID_PREFIX, "");
 
 	const podcast = await podcastsData.getPodcastById(id);
@@ -113,7 +113,7 @@ builder.defineStreamHandler(async ({
 }) => {
 
 	usibilityCounters.streamRequests++;
-	logger.trace(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests);
+	logger.info(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests);
 
 	id = id.replace(constants.ID_PREFIX, "");
 

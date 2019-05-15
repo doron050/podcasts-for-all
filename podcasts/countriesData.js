@@ -9,7 +9,7 @@ function getCountriesStringsArray(countries) {
         countriesStringsArray.push(countries[countryCode]);
     });
 
-    logger.trace(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES + countriesStringsArray.length);
+    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES + countriesStringsArray.length);
     return countriesStringsArray.sort();
 }
 

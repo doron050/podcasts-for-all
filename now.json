@@ -12,7 +12,10 @@
     "env": {
         "VERSION": "@version",
         "LOG_LEVEL": "@log_level",
-        "PODCASTS_API_KEY": "@podcasts_api_key" 
+        "PODCASTS_API_KEY": "@podcasts_api_key",
+        "LOGGER_TOKEN": "@logger_token",
+        "LOGGER_HOST": "@logger_host",
+        "LOGGER_SUPRESS_ERRORS": "@logger_supress_errors"
     },
     "github": {
         "silent": true
