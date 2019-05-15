@@ -10,12 +10,12 @@
         "headers": { "cache-control": "public" }
     }],
     "env": {
-        "VERSION": "@version",
-        "LOG_LEVEL": "@log_level",
+        "VERSION": "1.0.2",
+        "LOG_LEVEL": "info",
         "PODCASTS_API_KEY": "@podcasts_api_key",
         "LOGGER_TOKEN": "@logger_token",
-        "LOGGER_HOST": "@logger_host",
-        "LOGGER_SUPRESS_ERRORS": "@logger_supress_errors"
+        "LOGGER_HOST": "listener.logz.io",
+        "LOGGER_SUPRESS_ERRORS": "false"
     },
     "github": {
         "silent": true
