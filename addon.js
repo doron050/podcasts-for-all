@@ -41,14 +41,19 @@ builder.defineCatalogHandler(async ({
 	let country = constants.API_CONSTANTS.DEFAULT_REGION;
 
 	if (extra.genre && id === constants.CATALOGS.BY_GENRE.ID) {
+		logger.info(constants.CATALOGS.BY_GENRE.NAME + ": " + extra.genre);
+
 		genre = extra.genre;
 		genre = genresData.findGenreId(genre)
 	} else if (extra.genre && id === constants.CATALOGS.BY_COUNTRY.ID) {
+		logger.info(constants.CATALOGS.BY_COUNTRY.NAME + ": " + extra.genre);
+
 		country = extra.genre;
 		country = countriesData.findCountryId(country);
 	} else if (extra.genre && id === constants.CATALOGS.FEELING_LUCKY.ID) {
 		const podcast = await podcastsData.getFeelingLucky();
 		const serieses = await convertors.podcastsToSerieses([convertors.luckyPodcastToPodcast(podcast)]);
+
 		return {
 			metas: serieses.asArray
 		};
@@ -56,6 +61,8 @@ builder.defineCatalogHandler(async ({
 
 	// If there is active search using search api instead of best podcasts api
 	if (extra.search) {
+
+		logger.info("Search: " + extra.search);
 
 		let Serieses = [];
 		if (id === constants.CATALOGS.BY_GENRE.ID){
@@ -89,8 +96,10 @@ builder.defineMetaHandler(async ({
 	logger.trace(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ") Meta Counter: " + usibilityCounters.metaRequests);
 	id = id.replace(constants.ID_PREFIX, "");
 
-	//currentPoducastId = id;
 	const podcast = await podcastsData.getPodcastById(id);
+
+	logger.info("Podcast: " + podcast.title + " | " + podcast.country + " | " + podcast.language);
+
 	return {
 		meta: await convertors.podcastToSeries(podcast),
 		video: convertors.podcastToSeriesVideo(podcast)
