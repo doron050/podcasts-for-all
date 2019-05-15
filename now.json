@@ -6,7 +6,8 @@
     }],
     "routes": [{
         "src": "/.*",
-        "dest": "/serverless.js"
+        "dest": "/serverless.js",
+        "headers": { "cache-control": "s-maxage=86400" }
     }],
     "env": {
         "VERSION": "@version",
