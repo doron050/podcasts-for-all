@@ -14,7 +14,7 @@ function getGenresStringsFromArray(ids) {
         genresStrings.push(genresById[id].name.replace(" & ", " and "));
     }
 
-    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length);
     return genresStrings.sort();
 }
 
@@ -25,7 +25,7 @@ function getGenresIdsFromArray(genres) {
         genresIds.push(genre.id);
     });
 
-    logger.info(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length);
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length);
     return getGenresStringsFromArray(genresIds);
 }
 
@@ -36,7 +36,7 @@ function createPodcastGenresById(genres) {
         genresById[genre.id] = genre;
     });
 
-    logger.info(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genres.length);
+    logger.debug(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genres.length);
     return genresById;
 }
 
@@ -50,7 +50,7 @@ function findGenreId(genreName) {
             genreId = genres.genres[genreCount].id;
             genreFounded = true;
 
-            logger.info(constants.LOG_MESSAGES.SUCCESS_FIND_GENRE_BY_ID + genreName + " - " + genreId);
+            logger.debug(constants.LOG_MESSAGES.SUCCESS_FIND_GENRE_BY_ID + genreName + " - " + genreId);
         }
 
         genreCount++;

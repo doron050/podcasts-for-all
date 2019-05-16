@@ -2,8 +2,8 @@ const logzioLogger = require('logzio-nodejs').createLogger({
     token: process.env.LOGGER_TOKEN,
     host: process.env.LOGGER_HOST,
     supressErrors: process.env.LOGGER_SUPRESS_ERRORS,
+    debug: process.env.LOGGER_INCLUDE_DEBUG
 });
-
 
 const log4js = require('log4js');
 log4js.configure({
