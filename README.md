@@ -102,7 +102,11 @@ $ npm install
 ```diff
 +# VERSION= [Addon Version]
 +# PODCASTS_API_KEY= [Listen Notes API KEY]
-+# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
+-# LOG_LEVEL= [Logger level- such as: trace, debug, error...]
++# LOGGER_TOKEN= [Your Logzio api` token]
++# LOGGER_HOST= [Destination host name]
++# LOGGER_SUPRESS_ERRORS=true
++# LOGGER_INCLUDE_DEBUG= [Should the logger print debug messages]
 ```
 
 * Run your addon local server using `npm start`
