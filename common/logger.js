@@ -4,7 +4,6 @@ const logzioLogger = require('logzio-nodejs').createLogger({
     supressErrors: process.env.LOGGER_SUPRESS_ERRORS,
 });
 
-
 const log4js = require('log4js');
 log4js.configure({
     appenders: {
