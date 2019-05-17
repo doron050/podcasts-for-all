@@ -28,6 +28,7 @@ const LOG_MESSAGES = {
     ERROR_FEELING_LUCKY: "Error- get feeling lucky! Error: ",
     START_CATALOG_HANDLER: "Handler: Catalog | ",
     SEARCH_ON_CATALOG_HANDLER: "Search available: ",
+    START_SUBTITLE_HANDLER: "SUBTITLE: Subtitle | ",
     START_META_HANDLER: "Handler: Meta | ",
     START_STREAM_HANDLER: "Handler: Stream | ",
     START_FEELING_LUCKY: "Start get feeling lucky",
@@ -81,8 +82,20 @@ const CATALOGS = {
         ID: 'feelingLucky',
         NAME: "Feeling Lucky!",
         GENRES: ["Good luck!"]
+    },
+    SEARCH: {
+        ID: 'search',
+        NAME: "Search"
     }
 };
+
+const HANDLERS = {
+    CATALOG: "CATALOG",
+    META: "META",
+    STREAM: "STREAM",
+    SUBTITLE: "SUBTITLE",
+    CONVERTOR: "CONVERTOR"
+}
 
 const API_CONSTANTS = {
     DEFAULT_GENRE: 0,
@@ -125,6 +138,7 @@ const API_CONSTANTS = {
 
 module.exports = {
     CATALOGS,
+    HANDLERS,
     LOG_LEVEL,
     LOG_MESSAGES,
     PODCASTS_DATA_BASE_API_URL,

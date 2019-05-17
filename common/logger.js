@@ -22,35 +22,55 @@ log4js.configure({
 const log4jslogger = log4js.getLogger("default");
 
 
-function log(msg) {
+function log(msg, handler, catalog, genre, count, item) {
     log4jslogger.log(msg);
     logzioLogger.log({
         message: msg,
-        level: 'debug'
+        level: 'debug',
+        handler: handler,
+        catalog: catalog,
+        genre: genre,
+        count: count,
+        item: item
     });
 }
 
-function debugLog(msg) {
+function debugLog(msg, handler, catalog, genre, count, item) {
     log4jslogger.debug(msg);
     logzioLogger.log({
         message: msg,
-        level: 'debug'
+        level: 'debug',
+        handler: handler,
+        catalog: catalog,
+        genre: genre,
+        count: count,
+        item: item
     });
 }
 
-function infoLog(msg) {
+function infoLog(msg, handler, catalog, genre, count, item) {
     log4jslogger.info(msg);
     logzioLogger.log({
         message: msg,
-        level: 'info'
+        level: 'info',
+        handler: handler,
+        catalog: catalog,
+        genre: genre,
+        count: count,
+        item: item
     });
 }
 
-function errorLog(msg) {
+function errorLog(msg, handler, catalog, genre, count, item) {
     log4jslogger.info(msg);
     logzioLogger.log({
         message: msg,
-        level: 'error'
+        level: 'error',
+        handler: handler,
+        catalog: catalog,
+        genre: genre,
+        count: count,
+        item: item
     });
 }
 

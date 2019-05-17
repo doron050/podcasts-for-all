@@ -6,7 +6,7 @@ const genresData = require("./genresData");
 // All functions that convert podcast or episode object to Stremio object
 function episodeToVideo(episode, episodeNumber) {
 
-    logger.debug(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id);
+    logger.debug(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id, constants.HANDLERS.CONVERTOR, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, episode);
 
     return {
         id: constants.ID_PREFIX + episode.id,
@@ -25,7 +25,7 @@ function episodeToVideo(episode, episodeNumber) {
 }
 
 function episodesToVideos(episodes) {
-    logger.debug(constants.LOG_MESSAGES.START_CONVERT_EPISODES_TO_VIDEOS + episodes.length);
+    logger.debug(constants.LOG_MESSAGES.START_CONVERT_EPISODES_TO_VIDEOS + episodes.length, constants.HANDLERS.CONVERTOR, constants.API_CONSTANTS.TYPES.EPISODE, null, episodes.length, episodes);
 
     let videos = {
         asArray: [],
@@ -46,7 +46,7 @@ function episodesToVideos(episodes) {
 }
 
 async function podcastToSeries(podcast) {
-    logger.debug(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id);
+    logger.debug(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id, constants.HANDLERS.CONVERTOR, constants.API_CONSTANTS.TYPES.PODCAST, null, 1, podcast);
 
     let released = "";
     if (podcast.earliest_pub_date_ms) released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
