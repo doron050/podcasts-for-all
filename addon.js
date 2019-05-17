@@ -68,7 +68,7 @@ builder.defineCatalogHandler(async ({
 		let Serieses = [];
 		if (id === constants.CATALOGS.BY_GENRE.ID){
 
-			logger.info(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search, constants.HANDLERS.CATALOG, constants.CATALOGS.SEARCH.NAME, extra.search);
+			logger.info(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search, constants.HANDLERS.CATALOG, constants.CATALOGS.SEARCH.NAME, null, null extra.search);
 
 			const podcasts = await podcastsData.searchPodcasts(extra.search);
 			Serieses = await convertors.podcastsToSerieses(podcasts);
