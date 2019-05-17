@@ -36,7 +36,7 @@ builder.defineCatalogHandler(async ({
 }) => {
 	usibilityCounters.catalogRequests++;
 
-	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ") Catalog Counter: " + usibilityCounters.catalogRequests, constants.HANDLERS.CATALOG);
+	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ") Catalog Counter: " + usibilityCounters.catalogRequests, constants.HANDLERS.CATALOG, id);
 
 	let genre = 0;
 	let country = constants.API_CONSTANTS.DEFAULT_REGION;
@@ -68,7 +68,7 @@ builder.defineCatalogHandler(async ({
 		let Serieses = [];
 		if (id === constants.CATALOGS.BY_GENRE.ID){
 
-			logger.info(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search, constants.HANDLERS.CATALOG, constants.CATALOGS.SEARCH.NAME, null, null extra.search);
+			logger.info(constants.LOG_MESSAGES.SEARCH_ON_CATALOG_HANDLER + extra.search, constants.HANDLERS.CATALOG, constants.CATALOGS.SEARCH.NAME, extra.search.toLowerCase(), null, extra.search.toLowerCase());
 
 			const podcasts = await podcastsData.searchPodcasts(extra.search);
 			Serieses = await convertors.podcastsToSerieses(podcasts);
