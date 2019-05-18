@@ -14,7 +14,7 @@ function getGenresStringsFromArray(ids) {
         genresStrings.push(genresById[id].name.replace(" & ", " and "));
     }
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length, constants.CATALOGS.BY_GENRE.NAME, null, genresStrings.length);
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_IDS_TO_NAMES + genresStrings.length, constants.HANDLERS.CONVERTOR, constants.CATALOGS.BY_GENRE.NAME, null, null, genresStrings.length);
     return genresStrings.sort();
 }
 
@@ -25,7 +25,7 @@ function getGenresIdsFromArray(genres) {
         genresIds.push(genre.id);
     });
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length, constants.CATALOGS.BY_GENRE.NAME, null, genresIds.length);
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_GENRES_NAMES_TO_IDS + genresIds.length, constants.HANDLERS.CONVERTOR, constants.CATALOGS.BY_GENRE.NAME, null, null, genresIds.length);
     return getGenresStringsFromArray(genresIds);
 }
 
@@ -36,7 +36,7 @@ function createPodcastGenresById(genres) {
         genresById[genre.id] = genre;
     });
 
-    logger.debug(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genres.length, constants.CATALOGS.BY_GENRE.NAME, null, null, genres.length);
+    logger.debug(constants.LOG_MESSAGES.INIT_GENRES_BY_ID_OBJECT + genres.length, constants.HANDLERS.CONVERTOR, constants.CATALOGS.BY_GENRE.NAME, null, null, genres.length);
     return genresById;
 }
 

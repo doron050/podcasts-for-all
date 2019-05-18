@@ -17,14 +17,6 @@ const manifest = require('./manifest');
 
 logger.info(constants.LOG_MESSAGES.START_ADDON + " Version: " + process.env.VERSION);
 
-// Usibility counters
-let usibilityCounters = {
-	catalogRequests: 0,
-	metaRequests: 0,
-	streamRequests: 0,
-	subtitleRequests: 0
-};
-
 const builder = new addonBuilder(manifest);
 
 // Addon handlers
@@ -34,9 +26,8 @@ builder.defineCatalogHandler(async ({
 	id,
 	extra
 }) => {
-	usibilityCounters.catalogRequests++;
 
-	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ") Catalog Counter: " + usibilityCounters.catalogRequests, constants.HANDLERS.CATALOG, id);
+	logger.info(constants.LOG_MESSAGES.START_CATALOG_HANDLER + "(type: " + type + " & id: " + id + ")", constants.HANDLERS.CATALOG, id);
 
 	let genre = 0;
 	let country = constants.API_CONSTANTS.DEFAULT_REGION;
@@ -93,9 +84,7 @@ builder.defineMetaHandler(async ({
 	id
 }) => {
 
-	usibilityCounters.metaRequests++;
-
-	logger.info(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ") Meta Counter: " + usibilityCounters.metaRequests, constants.HANDLERS.META, constants.API_CONSTANTS.TYPES.PODCAST);
+	logger.info(constants.LOG_MESSAGES.START_META_HANDLER + "(type: " + type + " & id: " + id + ")", constants.HANDLERS.META, constants.API_CONSTANTS.TYPES.PODCAST);
 	id = id.replace(constants.ID_PREFIX, "");
 
 	const podcast = await podcastsData.getPodcastById(id);
@@ -114,8 +103,7 @@ builder.defineStreamHandler(async ({
 	type
 }) => {
 
-	usibilityCounters.streamRequests++;
-	logger.info(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests, constants.HANDLERS.STREAM, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: id});
+	logger.info(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ")", constants.HANDLERS.STREAM, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: id});
 
 	id = id.replace(constants.ID_PREFIX, "");
 
@@ -128,7 +116,7 @@ builder.defineStreamHandler(async ({
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineSubtitlesHandler.md
 builder.defineSubtitlesHandler(async function (args) {
 
-	logger.info(constants.LOG_MESSAGES.START_SUBTITLE_HANDLER + "(type: " + args.type + " & id: " + args.id + ") Subtitle Counter: " + usibilityCounters.subtitleRequests, constants.HANDLERS.SUBTITLE, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: args.id});
+	logger.info(constants.LOG_MESSAGES.START_SUBTITLE_HANDLER + "(type: " + args.type + " & id: " + args.id + ")", constants.HANDLERS.SUBTITLE, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: args.id});
 
 	return {
 		subtitles: []
