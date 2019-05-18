@@ -123,7 +123,7 @@ async function getFeelingLucky() {
     try {
         const response = await podcastsApi.getFeelingLucky();
 
-        logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id, constants.CATALOGS.FEELING_LUCKY, null, 1, response.data);
+        logger.debug(constants.LOG_MESSAGES.SUCCESS_GET_FEELING_LUCKY + response.data.id, constants.CATALOGS.FEELING_LUCKY, null, 1, {result: response.data});
         return response.data;
     } catch (e) {
         logListenNoteErrors('getting feeling lucky podcast', e);
