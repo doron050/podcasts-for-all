@@ -1,13 +1,10 @@
 const logger = require("../common/logger");
 const constants = require("../common/const");
-const podcastsData = require("./podcastsData");
-const genresData = require("./genresData");
+const podcastsData = require("./podcastsDataFetcher");
+const genresData = require("./genresDataFetcher");
 
 // All functions that convert podcast or episode object to Stremio object
 function episodeToVideo(episode, episodeNumber) {
-
-    //logger.debug(constants.LOG_MESSAGES.START_CONVERT_EPISODE_TO_VIDEO + episode.id, constants.HANDLERS.CONVERTOR, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, episode);
-
     return {
         id: constants.ID_PREFIX + episode.id,
         title: episode.title,
@@ -19,7 +16,6 @@ function episodeToVideo(episode, episodeNumber) {
         available: true,
         episode: episodeNumber,
         season: 1,
-        //trailer: trailer,
         overview: episode.description
     };
 }
@@ -45,37 +41,49 @@ function episodesToVideos(episodes) {
     return videos;
 }
 
-async function podcastToSeries(podcast) {
+async function podcastToSeries(podcast, origin) {
     //logger.debug(constants.LOG_MESSAGES.START_CONVERT_PODCAST_TO_SERIES + podcast.id, constants.HANDLERS.CONVERTOR, constants.API_CONSTANTS.TYPES.PODCAST, null, 1, podcast);
 
     let released = "";
     if (podcast.earliest_pub_date_ms) released = (new Date(podcast.earliest_pub_date_ms)).toISOString();
 
-    let series = {
-        id: constants.ID_PREFIX + podcast.id,
-        type: "series",
-        name: podcast.title,
-        poster: podcast.thumbnail,
-        //genres: genresData.getGenresStringsFromArray(podcast.genre_ids),
-        genres: generateBasicGenres(podcast),
-        posterShape: "regular",
-        background: podcast.image,
-        logo: constants.ADDON_LOGO,
-        description: podcast.description,
+    let series = {};
+    if (origin === constants.PODCAST_TYPE.SEARCH) {
+        series = {
+            id: constants.ID_PREFIX + podcast.id,
+            type: "series",
+            name: podcast.title_original,
+            poster: podcast.thumbnail,
+            genres: generateBasicGenres(podcast),
+            posterShape: "regular",
+            background: podcast.image,
+            logo: constants.ADDON_LOGO,
+            description: podcast.description_original,
+            director: [podcast.publisher_original],
+            released: released,
+            inTheaters: true,
+        };
+    } else {
+        series = {
+            id: constants.ID_PREFIX + podcast.id,
+            type: "series",
+            name: podcast.title,
+            poster: podcast.thumbnail,
+            genres: generateBasicGenres(podcast),
+            posterShape: "regular",
+            background: podcast.image,
+            logo: constants.ADDON_LOGO,
+            description: podcast.description,
+            director: [podcast.publisher],
+            released: released,
+            inTheaters: true,
+            language: podcast.language,
+            country: podcast.country,
+            awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
+            website: podcast.website
+        };
+    }
 
-        director: [podcast.publisher],
-        //imdbRating: 10,
-        //dvdRelease: "",
-        released: released,
-        inTheaters: true,
-        //videos: episodesAsVideos.asArray,
-        //certification: constants.API_CONSTANTS.DEFAULT_CERTIFICATION,
-        //runtime = "Last episode length: " + (podcast.episodes[0].audio_length_sec / 60).toFixed(0) + " minutes",
-        language: podcast.language,
-        country: podcast.country,
-        awards: generateAwards(podcast.explicit_content, podcast.is_claimed),
-        website: podcast.website
-    };
 
     if (podcast.earliest_pub_date_ms || podcast.latest_pub_date_ms) {
         series.releaseInfo = generateReleaseInfo(podcast.earliest_pub_date_ms, podcast.latest_pub_date_ms)
@@ -97,14 +105,14 @@ async function podcastToSeries(podcast) {
     return series;
 }
 
-async function podcastsToSerieses(podcasts) {
+async function podcastsToSerieses(podcasts, origin) {
     let serieses = {
         asArray: [],
         asObjectById: {}
     };
 
     for (let i = 0; i < podcasts.length; i++) {
-        let currentSeries = await podcastToSeries(podcasts[i]);
+        let currentSeries = await podcastToSeries(podcasts[i], origin);
 
         serieses.asArray.push(currentSeries);
         serieses.asObjectById[podcasts[i].id] = currentSeries;
@@ -166,8 +174,6 @@ function podcastToSeriesVideo(podcast) {
         title: podcast.title,
         thumbnail: podcast.thumbnail,
         available: true,
-        //season: 1,
-        //episode: 1,
         trailer: podcast.youtube_url,
         overview: podcast.description
     };
@@ -180,9 +186,9 @@ function podcastToSeriesVideo(podcast) {
 
 function getStreamsFromEpisode(episode) {
     let streams = [{
-            url: episode.audio,
-            title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
-        },
+        url: episode.audio,
+        title: constants.API_CONSTANTS.STREAMS_TITLES.DEFAULT_STREAM_TITLE
+    },
         {
             externalUrl: episode.listennotes_url,
             title: constants.API_CONSTANTS.STREAMS_TITLES.LISTEN_NOTES_STREAM_TITLE
@@ -241,7 +247,6 @@ function luckyPodcastToPodcast(luckyPodcast) {
 }
 
 module.exports = {
-    episodesToVideos,
     podcastsToSerieses,
     podcastToSeries,
     podcastToSeriesVideo,

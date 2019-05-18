@@ -10,6 +10,7 @@ const LOG_MESSAGES = {
     START_CONVERT_PODCAST_TO_SERIES: "Start convert podcast to series: ",
     START_GET_BEST_PODCASTS: "Start get best podcasts: ",
     START_SEARCH_PODCASTS: "Start search for podcasts: ",
+    START_SEARCH_PODCASTS_FOR_GENRE: "Start search for podcasts by one of the genres: ",
     START_GET_PODCAST_BY_ID: "Start get podcast by id: ",
     START_GET_EPISODE_BY_ID: "Start get episode by id: ",
     SUCCESS_GET_BEST_PODCASTS: "Success- get best podcasts! number of results: ",
@@ -53,15 +54,6 @@ const PODCASTS_API_KEY = {
     KEY: process.env.PODCASTS_API_KEY
 };
 
-// Podcast api docs https://www.listennotes.com/api/docs/
-const apiInstance = axios.create({
-    baseURL: PODCASTS_DATA_BASE_API_URL,
-    //timeout: 2000,
-    headers: {
-        'X-ListenAPI-Key': PODCASTS_API_KEY.KEY
-    }
-});
-
 const ID_PREFIX = "ap";
 
 const CONTACT_EMAIL = "podcasts_for_all@yahoo.com";
@@ -77,6 +69,14 @@ const CATALOGS = {
     BY_COUNTRY: {
         ID: 'byCountry',
         NAME: 'Countries'
+    },
+    BY_MOOD: {
+        ID: 'byMood',
+        NAME: 'Moods'
+    },
+    BY_TREND: {
+        ID: 'byTrend',
+        NAME: '100 Trends'
     },
     FEELING_LUCKY: {
         ID: 'feelingLucky',
@@ -136,7 +136,12 @@ const API_CONSTANTS = {
     INSTAGRAM_BASE_URL: "https://www.instagram.com/"
 };
 
+const PODCAST_TYPE = {
+    SEARCH: 'SEARCH'
+};
+
 module.exports = {
+    PODCAST_TYPE,
     CATALOGS,
     HANDLERS,
     LOG_LEVEL,
@@ -144,7 +149,6 @@ module.exports = {
     PODCASTS_DATA_BASE_API_URL,
     PODCASTS_DATA_API_ROUTES,
     PODCASTS_API_KEY,
-    apiInstance,
     API_CONSTANTS,
     ID_PREFIX,
     CONTACT_EMAIL,
