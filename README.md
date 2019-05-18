@@ -44,6 +44,8 @@
   * Top Podcasts
   * By Genres
   * By Country
+  * By Mood
+  * By Trend
   * Felling Luckey - Random podcast
 * Search for podcasts :mag:
 * Extra details :bookmark:
