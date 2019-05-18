@@ -9,7 +9,7 @@ function getCountriesStringsArray(countries) {
         countriesStringsArray.push(countries[countryCode]);
     });
 
-    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES + countriesStringsArray.length, constants.HANDLERS.CONVERTOR, constants.CATALOGS.BY_COUNTRY.NAME, null, {length: countries.length});
+    logger.debug(constants.LOG_MESSAGES.SUCCESS_TRANSLATE_COUNTRIES_CODES_TO_NAMES + countriesStringsArray.length, constants.HANDLERS.CONVERTOR, constants.CATALOGS.BY_COUNTRY.NAME, null, null, {length: countries.length});
     return countriesStringsArray.sort();
 }
 
