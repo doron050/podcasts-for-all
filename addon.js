@@ -115,7 +115,7 @@ builder.defineStreamHandler(async ({
 }) => {
 
 	usibilityCounters.streamRequests++;
-	logger.info(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests, constants.HANDLERS.STREAM, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, id);
+	logger.info(constants.LOG_MESSAGES.START_STREAM_HANDLER + "(type: " + type + " & id: " + id + ") Stream Counter: " + usibilityCounters.streamRequests, constants.HANDLERS.STREAM, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: id});
 
 	id = id.replace(constants.ID_PREFIX, "");
 
@@ -128,7 +128,7 @@ builder.defineStreamHandler(async ({
 // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineSubtitlesHandler.md
 builder.defineSubtitlesHandler(async function (args) {
 
-	logger.info(constants.LOG_MESSAGES.START_SUBTITLE_HANDLER + "(type: " + args.type + " & id: " + args.id + ") Subtitle Counter: " + usibilityCounters.subtitleRequests, constants.HANDLERS.SUBTITLE, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, args.id);
+	logger.info(constants.LOG_MESSAGES.START_SUBTITLE_HANDLER + "(type: " + args.type + " & id: " + args.id + ") Subtitle Counter: " + usibilityCounters.subtitleRequests, constants.HANDLERS.SUBTITLE, constants.API_CONSTANTS.TYPES.EPISODE, null, 1, {id: args.id});
 
 	return {
 		subtitles: []
