@@ -77,7 +77,7 @@ async function searchPodcasts(searchTerm, genreIds, offsetForPagination) {
 }
 
 async function getPodcastById(id, params = {}) {
-    logger.debug(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id, constants.HANDLERS.CATALOG, constants.API_CONSTANTS.TYPES.PODCAST, null, null, id);
+    logger.debug(constants.LOG_MESSAGES.START_GET_PODCAST_BY_ID + id, constants.HANDLERS.CATALOG, constants.API_CONSTANTS.TYPES.PODCAST, null, null, {id: id});
 
     // For offset for pagination filter
     try {
@@ -93,7 +93,7 @@ async function getPodcastById(id, params = {}) {
 }
 
 async function getEpisodeById(id) {
-    logger.debug(constants.LOG_MESSAGES.START_GET_EPISODE_BY_ID + id, constants.HANDLERS.CATALOG, constants.API_CONSTANTS.TYPES.EPISODE, null, null, id);
+    logger.debug(constants.LOG_MESSAGES.START_GET_EPISODE_BY_ID + id, constants.HANDLERS.CATALOG, constants.API_CONSTANTS.TYPES.EPISODE, null, null, {id: id});
 
     // For offset for pagination filter
     try {
