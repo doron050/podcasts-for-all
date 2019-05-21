@@ -93,7 +93,7 @@ button:hover {
    position: fixed;
    left: 0px;
    bottom: 0px;
-   width: 200px;
+   width: 160px;
 }
 
 #gitref{
