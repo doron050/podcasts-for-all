@@ -140,7 +140,7 @@ function landingTemplate(manifest) {
 				<button name="Install">Install Add-on</button>
 			</a>
          ${contactHTML}
-         <h4><img src="https://github.com/NivM1/podcasts-for-all/blob/master/static/GitHub-Mark.png?raw=true">Open an issue or contribute on <a href="https://github.com/NivM1/podcasts-for-all">github</a></h4>
+         <!--<h4><img src="https://github.com/NivM1/podcasts-for-all/blob/master/static/GitHub-Mark.png?raw=true">Open an issue or contribute on <a href="https://github.com/NivM1/podcasts-for-all">github</a></h4>-->
       </div>
       <img id="listen" src="${apiLogo}"/>
 		<script>
