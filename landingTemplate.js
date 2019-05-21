@@ -94,8 +94,11 @@ button:hover {
    left: 0px;
    bottom: 0px;
    width: 200px;
-}`
+}
 
+#gitref{
+   width: 40px;
+}`
 
 function landingTemplate(manifest) {
    const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
@@ -140,7 +143,7 @@ function landingTemplate(manifest) {
 				<button name="Install">Install Add-on</button>
 			</a>
          ${contactHTML}
-         <!--<h4><img src="https://github.com/NivM1/podcasts-for-all/blob/master/static/GitHub-Mark.png?raw=true">Open an issue or contribute on <a href="https://github.com/NivM1/podcasts-for-all">github</a></h4>-->
+         <h4><img id="gitref" src="https://github.com/NivM1/podcasts-for-all/blob/master/static/Octocat.png?raw=true">Open an issue or contribute on <a href="https://github.com/NivM1/podcasts-for-all">github</a></h4>
       </div>
       <img id="listen" src="${apiLogo}"/>
 		<script>
