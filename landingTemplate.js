@@ -134,8 +134,7 @@ function landingTemplate(manifest) {
 
 			<h2 class="gives">This add-on has:</h2>
 			<ul>
-            <li>More Podcasts than you can imagine</li>
-            <li>All Podcast Episodes</li>
+            <li>More Podcasts and episodes than you can imagine</li>
             <li>Social and podcast website refrences</li>
             <li>Various catalogs and search</li>
 			</ul>
