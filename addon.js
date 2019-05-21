@@ -84,7 +84,7 @@ builder.defineCatalogHandler(async ({
 		});
 
 		const podcasts = await podcastsData.searchPodcasts(extra.search);
-		Serieses = await convertors.podcastsToSerieses(podcasts);
+		Serieses = await convertors.podcastsToSerieses(podcasts, constants.PODCAST_TYPE.SEARCH);
 
 		return {
 			metas: Serieses.asArray
