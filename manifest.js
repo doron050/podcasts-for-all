@@ -65,6 +65,7 @@ module.exports = {
         }
     ],
     types: [
+        constants.CATALOGS.TYPE,
         "series"
     ],
     name: "Podcasts For All",
