@@ -26,7 +26,7 @@ h1, h2, h3 {
 }
 
 #addon {
-   width: 400px;
+   width: 416px;
    position: absolute;
    left: 0px;
    right: 0px;
@@ -90,17 +90,21 @@ button:hover {
 }
 
 #listen{
-   position: absolute;
+   position: fixed;
    left: 0px;
    bottom: 0px;
-   width: 200px;
-}`
+   width: 160px;
+}
 
+#gitref{
+   width: 40px;
+}`
 
 function landingTemplate(manifest) {
    const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
    const logo = manifest.logo || 'https://dl.strem.io/addon-logo.png'
-   const apiLogo = 'https://uc81fb9516a81fb32006bba9aacf.previews.dropboxusercontent.com/p/thumb/AAZ2F-nE9fa0SVSKcNPJMre9MejwrXNkZUY9xQ5MRxWirkNDWQ1L_GyYqTToCsMlC250BlvwirmrOzIoix-L4lCJQZ_eJ5mpJai79V7G-LL9OofoO8ikKpqS-yz2uGlaX-Ui5om4Lgkxz63UCmLtmTFZb4WMxomYSrChA6VtHEoMnUo6dwGbBWBbIJoYTtwes9-ebbeaWMkLbFrfq4zrMG9BF-mn7Mkw5R5VfzSXztDr1OxxNGI9iKfCRzW3aF7ikfC0eylWwWJctOeXECdpbatW7yz4t0di6tOjU-yyqxuT5Y3dEM4p3dopDfdbFJ68SLEaqE57cJ2nQgpGeHD_pt8aNPngvIHOR0rKZUIvPR2TB0dDDiIDRURs2W3BdCXeevQ/p.png?fv_content=true&size_mode=5';
+   const apiLogo = 'https://github.com/NivM1/podcasts-for-all/blob/master/static/listenNotes.png?raw=true';
+   const gitLogo = 'https://github.com/NivM1/podcasts-for-all/blob/master/static/Octocat.png?raw=true';
    const contactHTML = manifest.contactEmail ?
       `<h3 class="contact">
 		    To contact add-on creator:
@@ -131,16 +135,15 @@ function landingTemplate(manifest) {
 
 			<h2 class="gives">This add-on has:</h2>
 			<ul>
-            <li>More Podcasts than you can imagine</li>
-            <li>All Podcast Episodes</li>
+            <li>More Podcasts and episodes than you can imagine</li>
             <li>Social and podcast website refrences</li>
             <li>Various catalogs and search</li>
 			</ul>
-
 			<a id="installLink" class="install-link" href="#">
 				<button name="Install">Install Add-on</button>
 			</a>
-			${contactHTML}
+         ${contactHTML}
+         <h4><img id="gitref" src="${gitLogo}">Open an issue or contribute on <a href="https://github.com/NivM1/podcasts-for-all">github</a></h4>
       </div>
       <img id="listen" src="${apiLogo}"/>
 		<script>

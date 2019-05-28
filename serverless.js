@@ -1,5 +1,6 @@
 const {
-    getRouter
+    getRouter,
+    publishToCentral
 } = require("stremio-addon-sdk");
 const addonInterface = require("./addon");
 const landingTemplate = require("./landingTemplate");
@@ -20,6 +21,8 @@ router.get('/', (_, res) => {
     res.setHeader('content-type', 'text/html');
     res.end(landingHTML);
 });
+
+publishToCentral("https://podcasts-for-all.ga/manifest.json");
 
 module.exports = function (req, res) {
     router(req, res, function () {
